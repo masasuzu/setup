@@ -21,7 +21,10 @@ if [[ $UID = 0 ]]; then
     color="38;5;183"
 fi
 
-PROMPT="%{[${color}m%}$paren[1]%n@%m:%~$paren[2]%(!.#.$)%{[0m%} "
+#PROMPT="%{[${color}m%}$paren[1]%n@%m:%~$paren[2]%(!.#.$)%{[0m%} "
+RPROMPT="%{[${color}m%}$paren[1]%~$paren[2]%{[0m%}"
+PROMPT="%{[${color}m%}%n@%m%%%{[0m%} "
+
 
 if [[ -n "$WINDOW" ]]; then
     preexec() {
