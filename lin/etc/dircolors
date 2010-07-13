@@ -1,0 +1,119 @@
+#
+# ~/etc/dircolors
+#
+
+# TERM
+
+TERM putty
+TERM xterm
+TERM xterm-256color
+TERM screen
+TERM screen-bce
+TERM vt100
+
+# COLOR
+
+# color escape sequence:
+#   \033 [ seq (; seq) m
+#
+# seq:
+#   attr | fgcolor | bgcolor
+#
+# attr:
+#   1   bold
+#   2   underline
+#   3   reverse
+#
+# fgcolor:
+#   3n | 38;5;m
+#
+# bgcolor:
+#   4n | 48;5;m
+# 
+# n
+#   0   black
+#   1   red
+#   2   green
+#   3   yellow
+#   4   blue
+#   5   magena
+#   6   cyan
+#   7   white
+#
+# m
+#   0..15       system
+#   16..231     6x6x6 palette
+#   232..255    grayscale
+
+#
+# ATTR
+#
+                                
+NORMAL  0                       # global default, although everything should be something.
+FILE    38;5;254                # normal file
+DIR     38;5;228                # directory
+LINK    38;5;117                # seq or 'target'
+FIFO    38;5;201                # pipe
+SOCK    38;5;171                # socket
+DOOR    38;5;196                # door
+BLK     38;5;228                # block device driver
+CHR     38;5;228;48;5;17        # character device driver
+ORPHAN  38;5;1                  # symlink to nonexistent file
+#SETUID  38;5;255;48;5;17        # file that is setuid (u+s)
+#SETGID  38;5;255;48;5;52        # file that is setgid (g+s)
+#STICKY_OTHER_WRITABLE   38;5;228;48;5;22        # dir that is sticky and other-writable (+t,o+w)
+#OTHER_WRITABLE          38;5;228;48;5;52        # dir that is other-writable (o+w) and not sticky
+#STICKY                  38;5;228;48;5;17        # dir with the sticky bit set (+t) and not other-writable
+EXEC    38;5;213                # This is for files with execute permission:
+
+#
+# EXTENTION
+#
+
+# archive
+.tar    38;5;114
+.z      38;5;114
+.Z      38;5;114
+.gz     38;5;114
+.bz2    38;5;114
+
+.taz    38;5;114
+.tgz    38;5;114
+.tbz    38;5;114
+.lzh    38;5;114
+.zip    38;5;114
+
+.deb    38;5;173
+.rpm    38;5;173
+
+# image
+.jpg    38;5;223
+.jpeg   38;5;223
+.gif    38;5;223
+.bmp    38;5;223
+.pbm    38;5;223
+.pgm    38;5;223
+.ppm    38;5;223
+.tga    38;5;223
+.xbm    38;5;223
+.xpm    38;5;223
+.tif    38;5;223
+.tiff   38;5;223
+.png    38;5;223
+.mov    38;5;223
+.mpg    38;5;223
+.mpeg   38;5;223
+.avi    38;5;223
+.fli    38;5;223
+.gl     38;5;223
+.dl     38;5;223
+.xcf    38;5;223
+.xwd    38;5;223
+# audio
+.flac   38;5;223
+.mp3    38;5;223
+.mpc    38;5;223
+.ogg    38;5;223
+.wav    38;5;223
+
+# ~/etc/dircolors
