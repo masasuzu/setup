@@ -132,7 +132,7 @@ alias ll="ls -l"
 alias vi="vim"
 alias datetime="perl -e 'print localtime . qq{\n}'"
 alias pm="perldoc -m"
-alias screen="/usr/bin/tscreen"
+alias screen="/bin/tscreen"
 alias svk="PERL5LIB= svk"
 
 alias -g L="| lv"
