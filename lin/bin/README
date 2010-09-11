@@ -3,8 +3,8 @@
 スクリプトを動かす前に、rootで
 aptitude update && aptitude safe-upgrade && aptitude install vim ssh zsh git-core
 sed -i.bak -e 's/\/home\/masasuzu:\/bin\/bash/\/home\/masasuzu:\/bin\/zsh/' /etc/passwd
-sed -i.bak -e 's/# %sudo ALL=NOPASSWD: ALL/%sudo ALL=NOPASSWD: ALL/' /etc/sudoers.bak > /etc/sudoers
-sed -i.bak -e 's/sudo:x:27:/sudo:x:27:masasuzu/' /etc/group.bak > /etc/group
+sed -i.bak -e 's/# %sudo ALL=NOPASSWD: ALL/%sudo ALL=NOPASSWD: ALL/' /etc/sudoers
+sed -i.bak -e 's/sudo:x:27:/sudo:x:27:masasuzu/' /etc/group
 chmod o+r -R /usr/share/git-core/templates
 
 
