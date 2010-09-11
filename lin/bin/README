@@ -1,0 +1,6 @@
+基本的にdebian lenny用のセットアップスクリプト
+
+
+事前にssh git-core zsh sudoが必要かもしれない
+
+
