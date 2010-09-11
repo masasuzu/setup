@@ -1,6 +1,22 @@
 基本的にdebian lenny用のセットアップスクリプト
 
+スクリプトを動かす前に、rootで
+aptitude update && aptitude safe-upgrade && aptitude install vim ssh zsh git-core
+cp /etc/passwd /etc/passwd.bak
+sed 's/\/home\/masasuzu:\/bin\/bash/\/home\/masasuzu:\/bin\/zsh/' /etc/passwd.bak > /etc/passwd
+cp /etc/sudoers /etc/sudoers.bak
+sed -e 's/# %sudo ALL=NOPASSWD: ALL/%sudo ALL=NOPASSWD: ALL/' /etc/sudoers.bak > /etc/sudoers
+cp /etc/group /etc/group.bak
+sed -e 's/sudo:x:27:/sudo:x:27:masasuzu/' /etc/group.bak > /etc/group
+chmod o+r -R /usr/share/git-core/templates
 
-事前にssh git-core zsh sudoが必要かもしれない
 
+masasuzuにログインして
+scp '192.168.1.31:~/.ssh/*' ~/.ssh/
+mkdir project
+cd project
+git clone git@github.com:masasuzu/trush.git
+./trush/lin/bin/init-install-lenny.sh
+./trush/lin/bin/link-dotfile.sh
+./trush/lin/bin/install-tscreen-lenny.sh
 
