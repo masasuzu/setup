@@ -3,7 +3,7 @@
 tmp_dir=${HOME}/tmp
 
 sudo aptitude update && sudo aptitude safe-upgrade
-sudo aptitude install make libreadline5-dev
+sudo aptitude install gcc make libreadline5-dev
 
 if [ ! -d ${tmp_dir} ]
 then
