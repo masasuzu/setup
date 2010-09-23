@@ -19,3 +19,8 @@ git clone git@github.com:masasuzu/trush.git
 ./trush/lin/bin/link-dotfile.sh
 ./trush/lin/bin/install-tscreen-lenny.sh
 
+perlbrew
+
+cd ~/bin
+wget http://xrl.us/cpanm
+chmod +x cpanm
