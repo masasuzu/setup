@@ -149,7 +149,10 @@ function combinedlog() {
     tail -f /usr/local/apache/logs/`date +%Y`/`date +%m`/combined.`date +%Y_%m%d`.log
 }
 
-PATH=${PATH}:${HOME}/bin
+PATH=${PATH}:${HOME}/bin:${HOME}/usr/bin
 
 
 # ~/.zshrc
+
+# perlpbrew
+source $HOME/perl5/perlbrew/etc/bashrc
