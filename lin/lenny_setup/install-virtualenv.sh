@@ -7,7 +7,7 @@ sudo easy_install virtualenv virtualenvwrapper
 echo '
 # virtualenv
 export WORKON_HOME=${HOME}/.virtualenvs
-source /usr/bin/virtualenvwrapper.sh
+. /usr/bin/virtualenvwrapper.sh
 ' >> ${HOME}/.zshrc
 
 mkdir ${HOME}/.virtualenvs
