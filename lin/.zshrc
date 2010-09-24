@@ -156,3 +156,8 @@ PATH=${PATH}:${HOME}/bin:${HOME}/usr/bin
 
 # perlpbrew
 source $HOME/perl5/perlbrew/etc/bashrc
+
+# virtualenv
+export WORKON_HOME=${HOME}/.virtualenvs
+. /usr/bin/virtualenvwrapper.sh
+
