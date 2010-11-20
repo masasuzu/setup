@@ -155,9 +155,14 @@ PATH=${PATH}:${HOME}/bin:${HOME}/usr/bin
 # ~/.zshrc
 
 # perlpbrew
-source $HOME/perl5/perlbrew/etc/bashrc
+if [ -f $HOME/perl5/perlbrew/etc/bashrc ]
+then
+    source $HOME/perl5/perlbrew/etc/bashrc
+fi
 
 # virtualenv
+if [ -f ${HOME}/.virtualenvs ]
+then
 export WORKON_HOME=${HOME}/.virtualenvs
-. /usr/bin/virtualenvwrapper.sh
-
+    . /usr/bin/virtualenvwrapper.sh
+fi
