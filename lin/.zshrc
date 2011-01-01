@@ -141,28 +141,10 @@ alias -g H="| head"
 alias -g G="| grep"
 alias -g W="| wc"
 
-function errorlog() {
-    tail -f /usr/local/apache/logs/`date +%Y`/`date +%m`/error.`date +%Y_%m%d`.log
-}
-
-function combinedlog() {
-    tail -f /usr/local/apache/logs/`date +%Y`/`date +%m`/combined.`date +%Y_%m%d`.log
-}
-
-PATH=${PATH}:${HOME}/bin:${HOME}/usr/bin
+PATH=${PATH}:${HOME}/bin:${HOME}/opt/bin
 
 
 # ~/.zshrc
-
 # perlpbrew
-if [ -f $HOME/perl5/perlbrew/etc/bashrc ]
-then
-    source $HOME/perl5/perlbrew/etc/bashrc
-fi
+source $HOME/perl5/perlbrew/etc/bashrc
 
-# virtualenv
-if [ -f ${HOME}/.virtualenvs ]
-then
-export WORKON_HOME=${HOME}/.virtualenvs
-    . /usr/bin/virtualenvwrapper.sh
-fi

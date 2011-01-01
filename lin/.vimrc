@@ -47,18 +47,6 @@ imap ” ”<Left>
 imap <> <><Left>
 imap “ “<Left>
 
-
-" 行末の余分なスペース削除
-function! RTrim()
-    let s:cursor = getpos(“.”)
-    %s/\s\+$//e
-    call setpos(“.”, s:cursor)
-endfunction
-
-autocmd BufWritePre * call RTrim()
-
-
-
 autocmd FileType yaml set sw=2 ts=2
 autocmd FileType html set sw=2 ts=2
 
