@@ -1,0 +1,14 @@
+[core]
+	pager = "less -R"
+	editor = vim
+
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+	ui = always
+
+[user]
+	name = masasuzu / SUZUKI Masashi
+	email = m15.suzuki.masashi@gmail.com
+
