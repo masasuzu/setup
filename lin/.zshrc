@@ -141,6 +141,7 @@ alias -g W="| wc"
 
 PATH=${PATH}:${HOME}/bin:${HOME}/opt/bin
 
+source ~/.zshdevrc
 
 # ~/.zshrc
 
