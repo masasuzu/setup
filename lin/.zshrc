@@ -21,22 +21,41 @@ if [[ $UID = 0 ]]; then
     color="38;5;183"
 fi
 
-RPROMPT="%{[${color}m%}$paren[1]%~$paren[2]%{[0m%}"
+#RPROMPT="%{[${color}m%}$paren[1]%~$paren[2]%{[0m%}"
 PROMPT="%{[${color}m%}%n@%m%%%{[0m%} "
 
+_update_rprompt () {
+    GIT_CURRENT_BRANCH=$( git branch &> /dev/null | grep '^\*' | cut -b 3- )
+    if [ ${GIT_CURRENT_BRANCH} ]
+    then
+        GIT_RPROMPT="%{[31m%}$paren[1]${GIT_CURRENT_BRANCH}$paren[2]%{[0m%}"
+    else
+        GIT_RPROMPT=""
+    fi
+    RPROMPT="%{[${color}m%}$paren[1]%~$paren[2]%{[0m%}${GIT_RPROMPT}"
+}
 
 if [[ -n "$WINDOW" ]]; then
     preexec() {
+        _update_rprompt
         local cmd=${1[(wr)^(*=*|sudo|vi|lv|ssh|-*)]}
         echo -ne "\ek$cmd\e\\"
     }
 
     precmd() {
+        _update_rprompt
         local cwd=`print -nP %~`
         echo -n "\ek$cwd:t/\e\\"
     }
-fi
+else
+    preexec() {
+        _update_rprompt
+    }
 
+    precmd() {
+        _update_rprompt
+    }
+fi
 # =======================================================================
 # history
 # -----------------------------------------------------------------------
