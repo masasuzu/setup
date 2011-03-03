@@ -11,6 +11,13 @@ L2ネットワークについて(VLANとかSTPとか)
 :Mail:
     m15.suzuki.masashi@gmail.com
 
+Agenda
+=======
+
+ 1. L2ネットワークについての軽い説明
+ 2. VLAN
+ 3. STP
+
 L2ネットワーク
 ==============
 
