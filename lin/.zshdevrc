@@ -4,3 +4,12 @@ then
     source ${HOME}/perl5/perlbrew/etc/bashrc
 fi
 
+if [ -d ${HOME}/.rvm ]
+then
+    source $HOME/.rvm/scripts/rvm
+fi
+
+if [ -d ${HOME}/.pythonbrew ]
+then
+    source ${HOME}/.pythonbrew/etc/bashrc
+fi
