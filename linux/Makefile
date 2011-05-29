@@ -3,6 +3,7 @@ config:
 	ln -fs `pwd`/home/.zshdevrc   ${HOME}/
 	ln -fs `pwd`/home/.zprofile   ${HOME}/
 	ln -fs `pwd`/home/.vimrc      ${HOME}/
+	ln -fs `pwd`/home/.vim        ${HOME}/
 	ln -fs `pwd`/home/.tscreenrc  ${HOME}/
 	ln -fs `pwd`/home/.screenrc   ${HOME}/
 	ln -fs `pwd`/home/.gitconfig  ${HOME}/
