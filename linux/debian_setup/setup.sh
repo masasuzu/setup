@@ -1,6 +1,6 @@
 #!/usr/bin/zsh
 
-cd ${HOME}/project/trush/lin/lenny_setup/setup
+cd $(dirname $0)
 
 ./init-install-lenny.sh
 ./link-dotfile.sh
