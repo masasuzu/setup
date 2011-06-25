@@ -1,5 +1,8 @@
 基本的にdebian lenny用のセットアップスクリプト
 
+#TODO:このREADMEいろいろ間違っている気がするので後で直すよ
+
+
 スクリプトを動かす前に、rootで
 aptitude update && aptitude safe-upgrade && aptitude install vim ssh zsh git-core sudo &&\
 sed -i.bak -e 's/\/home\/masasuzu:\/bin\/bash/\/home\/masasuzu:\/bin\/zsh/' /etc/passwd &&\
