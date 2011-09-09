@@ -38,17 +38,12 @@ set cmdheight=2
 set showcmd
 set title
 
-" 括弧の対応
-imap {} {}<Left>
-imap [] []<Left>
-imap () ()<Left>
-imap “” “”<Left>
-imap ” ”<Left>
-imap <> <><Left>
-imap “ “<Left>
+"ウィンドウタブ
+imap ,t :tabnew
 
 autocmd FileType yaml set sw=2 ts=2
 autocmd FileType html set sw=2 ts=2
+autocmd BufNewFile,BufRead *.psgi set filetype=perl
 
 syntax enable
 let perl_no_extended_vars=1

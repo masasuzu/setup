@@ -1,13 +1,15 @@
-config:
-	ln -fs `pwd`/home/.zshrc      ${HOME}/
-	ln -fs `pwd`/home/.zshdevrc   ${HOME}/
-	ln -fs `pwd`/home/.zprofile   ${HOME}/
-	ln -fs `pwd`/home/.vimrc      ${HOME}/
-	ln -fs `pwd`/home/.vim        ${HOME}/
-	ln -fs `pwd`/home/.tscreenrc  ${HOME}/
-	ln -fs `pwd`/home/.screenrc   ${HOME}/
-	ln -fs `pwd`/home/.gitconfig  ${HOME}/
-	ln -fs `pwd`/home/etc         ${HOME}/
+dev:
+	ln -fs `pwd`/home/zshrc      ${HOME}/.zshrc
+	mkdir -p ${HOME}/.zsh
+	ln -fsn `pwd`/home/zsh/devrc ${HOME}/.zsh/devrc
+	ln -fs `pwd`/home/zprofile   ${HOME}/.zprofile
+	ln -fs `pwd`/home/vimrc      ${HOME}/.vimrc
+	ln -fsn `pwd`/home/vim       ${HOME}/.vim
+	ln -fs `pwd`/home/tscreenrc  ${HOME}/.tscreenrc
+	ln -fs `pwd`/home/screenrc   ${HOME}/.screenrc
+	ln -fsn `pwd`/home/etc       ${HOME}/etc
 	mkdir -p ${HOME}/opt
-	ln -fs `pwd`/home/bin         ${HOME}/opt/
+	ln -fs `pwd`/home/bin        ${HOME}/opt/bin
 
+git:
+	ln -fs `pwd`/home/gitconfig  ${HOME}/.gitconfig

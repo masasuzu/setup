@@ -15,4 +15,9 @@ export LANG=ja_JP.utf8
 export EDITOR=vim
 export PAGER="lv -c"
 
+if [ -f ${HOME}/.zsh/workprofile ]
+then 
+    source ${HOME}/.zsh/workprofile
+fi
+
 # .zprofile

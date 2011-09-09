@@ -1,0 +1,1 @@
+/home/masashi/project/vim-quickrun/plugin/quickrun.vim

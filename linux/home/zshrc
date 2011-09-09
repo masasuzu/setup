@@ -1,16 +1,17 @@
-#
 # ~/.zshrc
 #
-
 # =======================================================================
 # prompt
 # -----------------------------------------------------------------------
 
 setopt prompt_subst
 setopt prompt_cr
+setopt transient_rprompt
+setopt prompt_percent
 
 paren="()"
 color="38;5;40"
+suff="%%"
 
 if [[ -n "$LOGIN_SHELL" ]]; then
     paren="[]"
@@ -19,12 +20,14 @@ fi
 
 if [[ $UID = 0 ]]; then
     color="38;5;183"
+    suff='#'
 fi
 
-#RPROMPT="%{[${color}m%}$paren[1]%~$paren[2]%{[0m%}"
-PROMPT="%{[${color}m%}%n@%m%%%{[0m%} "
+PROMPT="%{[33m%}${DOMAIN}%{[0m%} %{[${color}m%}%n@%m%${suff}{[0m%} "
+PROMPT2="%{[33m%}${DOMAIN}%{[0m%} %{[${color}m%}%n@%m>%{[0m%} "
 
-_update_rprompt () {
+
+function _update_rprompt () {
     GIT_CURRENT_BRANCH=$( git branch &> /dev/null | grep '^\*' | cut -b 3- )
     if [ ${GIT_CURRENT_BRANCH} ]
     then
@@ -36,26 +39,28 @@ _update_rprompt () {
 }
 
 if [[ -n "$WINDOW" ]]; then
-    preexec() {
+    function preexec() {
         _update_rprompt
         local cmd=${1[(wr)^(*=*|sudo|vi|lv|ssh|-*)]}
         echo -ne "\ek$cmd\e\\"
     }
 
-    precmd() {
+    function precmd() {
         _update_rprompt
         local cwd=`print -nP %~`
         echo -n "\ek$cwd:t/\e\\"
     }
 else
-    preexec() {
+    function preexec() {
         _update_rprompt
     }
 
-    precmd() {
+    function precmd() {
         _update_rprompt
     }
+
 fi
+
 # =======================================================================
 # history
 # -----------------------------------------------------------------------
@@ -69,7 +74,8 @@ setopt hist_ignore_space
 setopt hist_no_store
 setopt hist_reduce_blanks
 setopt hist_save_no_dups
-#setopt share_history
+setopt inc_append_history
+setopt share_history
 
 bindkey -e
 
@@ -106,14 +112,20 @@ setopt mark_dirs
 autoload -U compinit
 compinit -u
 
+zstyle ':completion:*' format '%B%d%b'
+zstyle ':completion:*' group-name ''
 zstyle ':completion:*' use-cache true
 zstyle ':completion:*:default:' menu select=1
-#zstyle ':completion:*:default:' menu select true
 zstyle ':completion:*:cd:*' tag-order local-direcories path-directories
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
-# _cache_hosts=(`sed -ne 's/,.*//p' ~/.ssh/known_hosts`)
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z} r:|[._-]=*'
+zstyle ':completion:*' verbose yes
 
+setopt complete_in_word
+setopt glob_complete
+setopt hist_expand
+setopt no_beep
 
 # =======================================================================
 # cd, ls
@@ -121,6 +133,29 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 setopt auto_cd
 setopt auto_pushd
+
+# =======================================================================
+# grep
+# -----------------------------------------------------------------------
+
+##### SEE ALSO http://www.clear-code.com/blog/2011/9/5.html
+if type ggrep > /dev/null 2>&1; then
+    alias grep=ggrep
+fi
+export GREP_OPTIONS
+GREP_OPTIONS="--binary-files=without-match"
+GREP_OPTIONS="--directories=recurse $GREP_OPTIONS"
+GREP_OPTIONS="--exclude=\*.tmp $GREP_OPTIONS"
+if grep --help | grep -q -- --exclude-dir; then
+    GREP_OPTIONS="--exclude-dir=.svn $GREP_OPTIONS"
+    GREP_OPTIONS="--exclude-dir=.git $GREP_OPTIONS"
+    GREP_OPTIONS="--exclude-dir=.deps $GREP_OPTIONS"
+    GREP_OPTIONS="--exclude-dir=.libs $GREP_OPTIONS"
+fi
+
+if grep --help | grep -q -- --color; then
+    GREP_OPTIONS="--color=auto $GREP_OPTIONS"
+fi
 
 # =======================================================================
 # process
@@ -145,12 +180,18 @@ setopt complete_aliases
 
 alias ls='ls --color=auto'
 alias ll="ls -l"
-#eval `dircolors -b ~/etc/dircolors.conf`
+alias la="ls -laF"
 
+alias cl="clear"
 alias vi="vim"
 alias datetime="perl -e 'print localtime . qq{\n}'"
 alias pm="perldoc -m"
-alias screen="/bin/tscreen"
+alias screen="/usr/bin/tscreen"
+alias svk="PERL5LIB= svk"
+
+alias apt-d="sudo aptitude update"
+alias apt-g="sudo aptitude safe-upgrade"
+alias apt-i="sudo aptitude install"
 
 alias -g L="| lv"
 alias -g T="| tail"
@@ -158,9 +199,44 @@ alias -g H="| head"
 alias -g G="| grep"
 alias -g W="| wc"
 
-PATH=${PATH}:${HOME}/bin:${HOME}/opt/bin
+function applog() {
+    multitail -f ${HOME}/var/log/apache/`date +%Y`/`date +%m`/error.`date +%Y_%m%d`.log ${HOME}/var/log/apache/`date +%Y`/`date +%m`/combined.`date +%Y_%m%d`.log
+}
 
-source ~/.zshdevrc
+function errorlog() {
+    tail -f ${HOME}/var/log/apache/`date +%Y`/`date +%m`/error.`date +%Y_%m%d`.log
+}
+
+function lv-errorlog() {
+    lv ${HOME}/var/log/apache/`date +%Y`/`date +%m`/error.`date +%Y_%m%d`.log
+}
+
+function combinedlog() {
+    tail -f ${HOME}/var/log/apache/`date +%Y`/`date +%m`/combined.`date +%Y_%m%d`.log
+}
+
+function cdl() {
+    if [ -d ~/project/$1/site_perl/ ]
+    then
+        cd ~/project/$1/site_perl/$1
+    else
+        cd ~/project/$1/lib/$1
+    fi
+}
+
+function cdp() {
+    cd ~/project/$1/
+}
+
+PATH=${PATH}:${HOME}/bin:${HOME}/usr/local/bin:${HOME}/opt/bin
+LANG=ja_JP.UTF-8; export LANG
+
+
+## 実行したプロセスの消費時間が3秒以上かかったら
+## 自動的に消費時間の統計情報を表示する。
+REPORTTIME=3
+
+source ${HOME}/.zsh/devrc
 
 # ~/.zshrc
 
