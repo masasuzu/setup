@@ -1,4 +1,9 @@
-dev:
+setup: env\
+		git\
+		perl\
+		node
+
+env:
 	mkdir -p ${HOME}/.zsh
 	mkdir -p ${HOME}/opt
 	mkdir -p ${HOME}/tmp
@@ -11,8 +16,9 @@ dev:
 	ln -fs  `pwd`/home/vimrc      ${HOME}/.vimrc
 	ln -fsn `pwd`/home/vim        ${HOME}/.vim
 	ln -fsn `pwd`/home/etc        ${HOME}/etc
-	ln -fs  `pwd`/home/bin        ${HOME}/opt/bin
+	ln -fsn `pwd`/home/bin        ${HOME}/opt/bin
 
+# 会社と家で.gitconfigを分けたいの
 git:
 	ln -fs `pwd`/home/gitconfig   ${HOME}/.gitconfig
 
