@@ -1,4 +1,5 @@
 #!/usr/bin/zsh
+#XXX: pythonbrewを使うのでこれは廃止
 
 if [ $1 ]
 then

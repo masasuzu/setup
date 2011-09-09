@@ -1,4 +1,5 @@
 #!/usr/bin/zsh
+#XXX: pythonbrewを使うのでこれは廃止
 
 ${HOME}/usr/bin/update-apt
 sudo aptitude install python python-setuptools
