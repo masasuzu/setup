@@ -1,0 +1,13 @@
+# fix $HOST
+case "${HOST/.*/}" in
+leon)
+    DOMAIN="[ INTRA ]"
+    ;;
+lenny*|squeeze*)
+    DOMAIN="[ LAB ]"
+    ;;
+*)
+    print ".zsh/devprofile: $HOST: unkown hostname"
+    ;;
+esac
+export DOMAIN

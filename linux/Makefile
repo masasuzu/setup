@@ -8,15 +8,16 @@ env:
 	mkdir -p ${HOME}/opt
 	mkdir -p ${HOME}/tmp
 	mkdir -p ${HOME}/bin
-	ln -fs  `pwd`/home/zshrc      ${HOME}/.zshrc
-	ln -fs  `pwd`/home/zsh/devrc  ${HOME}/.zsh/devrc
-	ln -fs  `pwd`/home/zprofile   ${HOME}/.zprofile
-	ln -fs  `pwd`/home/tscreenrc  ${HOME}/.tscreenrc
-	ln -fs  `pwd`/home/screenrc   ${HOME}/.screenrc
-	ln -fs  `pwd`/home/vimrc      ${HOME}/.vimrc
-	ln -fsn `pwd`/home/vim        ${HOME}/.vim
-	ln -fsn `pwd`/home/etc        ${HOME}/etc
-	ln -fsn `pwd`/home/bin        ${HOME}/opt/bin
+	ln -fs  `pwd`/home/zshrc            ${HOME}/.zshrc
+	ln -fs  `pwd`/home/zsh/devrc        ${HOME}/.zsh/devrc
+	ln -fs  `pwd`/home/zsh/devprofile   ${HOME}/.zsh/devprofile
+	ln -fs  `pwd`/home/zprofile         ${HOME}/.zprofile
+	ln -fs  `pwd`/home/tscreenrc        ${HOME}/.tscreenrc
+	ln -fs  `pwd`/home/screenrc         ${HOME}/.screenrc
+	ln -fs  `pwd`/home/vimrc            ${HOME}/.vimrc
+	ln -fsn `pwd`/home/vim              ${HOME}/.vim
+	ln -fsn `pwd`/home/etc              ${HOME}/etc
+	ln -fsn `pwd`/home/bin              ${HOME}/opt/bin
 
 # 会社と家で.gitconfigを分けたいの
 git:

@@ -16,8 +16,10 @@ export EDITOR=vim
 export PAGER="lv -c"
 
 if [ -f ${HOME}/.zsh/workprofile ]
-then 
+then
     source ${HOME}/.zsh/workprofile
+else
+    source ${HOME}/.zsh/devprofile
 fi
 
 # .zprofile
