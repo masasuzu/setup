@@ -21,8 +21,5 @@ git clone git@github.com:masasuzu/setup.git
 cp ${HOME}/project/setup/linux/
 make dev git perl node
 
-perlbrew
-
-cd ~/bin
-wget http://xrl.us/cpanm
-chmod +x cpanm
+source ${HOME}/.zprofile
+source ${HOME}/.zshrc
