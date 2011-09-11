@@ -48,7 +48,7 @@ TERM vt100
 #
 # ATTR
 #
-                                
+
 NORMAL  0                       # global default, although everything should be something.
 FILE    38;5;254                # normal file
 DIR     38;5;228                # directory
