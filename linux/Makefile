@@ -13,7 +13,6 @@ env:
 	ln -fs  `pwd`/home/zsh/devprofile   ${HOME}/.zsh/devprofile
 	ln -fs  `pwd`/home/zprofile         ${HOME}/.zprofile
 	ln -fs  `pwd`/home/tscreenrc        ${HOME}/.tscreenrc
-	ln -fs  `pwd`/home/screenrc         ${HOME}/.screenrc
 	ln -fs  `pwd`/home/vimrc            ${HOME}/.vimrc
 	ln -fsn `pwd`/home/vim              ${HOME}/.vim
 	ln -fsn `pwd`/home/etc              ${HOME}/etc
