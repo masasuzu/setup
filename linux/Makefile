@@ -30,6 +30,5 @@ perl:
 	curl -o ${HOME}/bin/cpanm -LO http://xrl.us/cpanm
 
 node:
-	sudo aptitude install -y g++
 	git clone git://github.com/creationix/nvm.git ${HOME}/.nvm
 
