@@ -186,7 +186,7 @@ alias cl="clear"
 alias vi="vim"
 alias datetime="perl -e 'print localtime . qq{\n}'"
 alias pm="perldoc -m"
-alias screen="/usr/bin/tscreen"
+alias screen="tscreen"
 
 alias apt-up="sudo aptitude update && sudo aptitude safe-upgrade"
 alias apt-i="sudo aptitude install"
