@@ -186,7 +186,6 @@ alias cl="clear"
 alias vi="vim"
 alias datetime="perl -e 'print localtime . qq{\n}'"
 alias pm="perldoc -m"
-alias screen="tscreen"
 
 alias apt-up="sudo aptitude update && sudo aptitude safe-upgrade"
 alias apt-i="sudo aptitude install"
@@ -198,6 +197,11 @@ alias -g G="| grep"
 alias -g W="| wc"
 
 alias refenv="source ${HOME}/.zshrc"
+
+# screen
+alias screen=`which tscreen`
+alias rs='screen -rd'
+alias ns='screen -S'
 
 function applog() {
     if [ -d ${HOME}/var/log/apache ]
