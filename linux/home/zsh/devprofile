@@ -1,3 +1,7 @@
+path=(
+    {/usr/{/local,},}/{,s}bin
+)
+
 # fix $HOST
 case "${HOST/.*/}" in
 philippe)
