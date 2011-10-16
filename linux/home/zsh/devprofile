@@ -13,6 +13,9 @@ leon)
 lenny*|squeeze*)
     DOMAIN="[ LAB ]"
     ;;
+lab)
+    DOMAIN="[ VPS-LAB ]"
+    ;;
 *)
     print ".zsh/devprofile: $HOST: unkown hostname"
     ;;
