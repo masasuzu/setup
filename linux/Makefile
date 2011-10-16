@@ -24,11 +24,11 @@ git:
 
 perl:
 	curl -L http://xrl.us/perlbrewinstall | bash
-	# source ${HOME}/perl5/perlbrew/etc/bashrc
+	# source ~/perl5/perlbrew/etc/bashrc
 
 ruby:
 	curl -L https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer | bash
-	# source "$HOME/.rvm/scripts/rvm"
+	# source ~/.rvm/scripts/rvm
 	# rvm pkg install zlib && rvm pkg install openssl
 	# rvm install 1.8.7 --with-openssl-dir=$rvm_path/usr --with-zlib-dir=$rvm_path/usr --with-readline-dir=$rvm_path/usr
 
