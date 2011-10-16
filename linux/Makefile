@@ -23,10 +23,7 @@ git:
 	ln -fs `pwd`/home/gitconfig   ${HOME}/.gitconfig
 
 perl:
-	curl -o ${HOME}/tmp/perlbrew -LO http://xrl.us/perlbrew
-	chmod +x ${HOME}/tmp/perlbrew
-	${HOME}/tmp/perlbrew init
-	curl -o ${HOME}/bin/cpanm -LO http://xrl.us/cpanm
+	curl -L http://xrl.us/perlbrewinstall | bash
 
 node:
 	git clone git://github.com/creationix/nvm.git ${HOME}/.nvm
