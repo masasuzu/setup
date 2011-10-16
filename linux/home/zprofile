@@ -8,7 +8,10 @@ stty -ixon
 umask 022
 
 limit coredumpsize 0
-eval `dircolors $HOME/etc/dircolors`
+if [ `uname` != 'Darwin' ]
+then
+    eval `dircolors $HOME/etc/dircolors`
+fi
 
 export LANG=ja_JP.utf8
 

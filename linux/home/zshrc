@@ -144,7 +144,10 @@ if type ggrep > /dev/null 2>&1; then
 fi
 export GREP_OPTIONS
 GREP_OPTIONS="--binary-files=without-match"
-GREP_OPTIONS="--directories=recurse $GREP_OPTIONS"
+if [ `uname` != 'Darwin' ]
+then
+    GREP_OPTIONS="--directories=recurse $GREP_OPTIONS"
+fi
 GREP_OPTIONS="--exclude=\*.tmp $GREP_OPTIONS"
 if grep --help | grep -q -- --exclude-dir; then
     GREP_OPTIONS="--exclude-dir=.svn $GREP_OPTIONS"
@@ -178,7 +181,10 @@ setopt NO_hup
 
 setopt complete_aliases
 
-alias ls='ls --color=auto'
+if [ `uname` != 'Darwin' ]
+then
+    alias ls='ls --color=auto'
+fi
 alias ll="ls -l"
 alias la="ls -laF"
 
