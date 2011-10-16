@@ -1,5 +1,8 @@
 # fix $HOST
 case "${HOST/.*/}" in
+philippe)
+    DOMAIN="[ LOCAL ]"
+    ;;
 leon)
     DOMAIN="[ INTRA ]"
     ;;
