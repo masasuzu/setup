@@ -24,15 +24,15 @@ git:
 
 perl:
 	curl -L http://xrl.us/perlbrewinstall | bash
-	# source ~/perl5/perlbrew/etc/bashrc
+	@echo source ~/perl5/perlbrew/etc/bashrc
 
 ruby:
 	curl -L https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer | bash
-	# source ~/.rvm/scripts/rvm
-	# rvm pkg install zlib && rvm pkg install openssl
-	# rvm install 1.8.7 --with-openssl-dir=$rvm_path/usr --with-zlib-dir=$rvm_path/usr --with-readline-dir=$rvm_path/usr
+	@echo source ~/.rvm/scripts/rvm
+	@echo rvm pkg install zlib && rvm pkg install openssl
+	@echo rvm install 1.8.7 --with-openssl-dir=$rvm_path/usr --with-zlib-dir=$rvm_path/usr --with-readline-dir=$rvm_path/usr
 
 node:
 	git clone git://github.com/creationix/nvm.git ${HOME}/.nvm
-	# source ~/.nvm/nvm.sh
+	@echo source ~/.nvm/nvm.sh
 
