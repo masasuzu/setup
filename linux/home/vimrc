@@ -1,3 +1,15 @@
+set nocompatible
+filetype off
+
+set rtp+=~/.vim/vundle.git/
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+Bundle 'thinca/vim-quickrun'
+Bundle 'scrooloose/nerdtree'
+
+filetype plugin indent on
+
 colorscheme darkblue
 "colorscheme default
 
@@ -48,3 +60,4 @@ autocmd BufNewFile,BufRead *.psgi set filetype=perl
 
 syntax enable
 let perl_no_extended_vars=1
+
