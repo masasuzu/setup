@@ -26,6 +26,10 @@ perl:
 	curl -L http://xrl.us/perlbrewinstall | bash
 	@echo source ~/perl5/perlbrew/etc/bashrc
 
+python:
+	curl -kL http://xrl.us/pythonbrewinstall | bash
+	@echoource ~/.pythonbrew/etc/bashrc
+
 ruby:
 	curl -L https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer | bash
 	@echo source ~/.rvm/scripts/rvm
