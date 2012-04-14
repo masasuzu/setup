@@ -19,44 +19,95 @@ if [[ -n "$LOGIN_SHELL" ]]; then
 fi
 
 if [[ $UID = 0 ]]; then
-    color="38;5;183"
     suff='#'
 fi
 
-PROMPT="%{[33m%}${DOMAIN}%{[0m%} %{[${color}m%}%n@%m%${suff}{[0m%} "
-PROMPT2="%{[33m%}${DOMAIN}%{[0m%} %{[${color}m%}%n@%m>%{[0m%} "
+autoload -U colors; colors;
+
+PROMPT="%{$fg_bold[yellow]%}${DOMAIN}%{${reset_color}%} %{$fg[cyan]%}%n@%m%${suff} %{${reset_color}%} "
+PROMPT2="%{$fg[yellow]%}${DOMAIN}%{${reset_color}%} %{$fg[red]%}%n@%m> %{${reset_color}%} "
 
 
-function _update_rprompt () {
+function update_rprompt () {
     GIT_CURRENT_BRANCH=$( git branch &> /dev/null | grep '^\*' | cut -b 3- )
     if [ ${GIT_CURRENT_BRANCH} ]
     then
-        GIT_RPROMPT="%{[31m%}$paren[1]${GIT_CURRENT_BRANCH}$paren[2]%{[0m%}"
+        GIT_PROMPT="$( git_prompt_color )$paren[1]branch:${GIT_CURRENT_BRANCH}$paren[2]%{${reset_color}%}$( git_status )"
     else
-        GIT_RPROMPT=""
+        GIT_PROMPT=""
     fi
-    RPROMPT="%{[${color}m%}$paren[1]%~$paren[2]%{[0m%}${GIT_RPROMPT}"
+    CURRENT_PATH="%{$fg[cyan]%}$paren[1]%~$paren[2]%{${reset_color}%}"
+    RPROMPT="${GIT_PROMPT}${CURRENT_PATH}"
+}
+
+GIT_PROMPT_ADDED="(added)"
+GIT_PROMPT_MODIFIED="(modified)"
+GIT_PROMPT_DELETED="(deleted)"
+GIT_PROMPT_RENAMED="(renamed)"
+GIT_PROMPT_UNMERGED="(unmerged)"
+GIT_PROMPT_UNTRACKED="(untracked)"
+
+function git_status {
+    GIT_INDEX=$(git status --porcelain 2> /dev/null)
+    GIT_STATUS=''
+    if $(echo "$GIT_INDEX" | grep '^?? ' &> /dev/null); then
+      GIT_STATUS="$GIT_PROMPT_UNTRACKED$GIT_STATUS"
+    fi
+    if $(echo "$GIT_INDEX" | grep '^A  ' &> /dev/null); then
+      GIT_STATUS="$GIT_PROMPT_ADDED$GIT_STATUS"
+    elif $(echo "$GIT_INDEX" | grep '^M  ' &> /dev/null); then
+      GIT_STATUS="$GIT_PROMPT_ADDED$GIT_STATUS"
+    fi
+    if $(echo "$GIT_INDEX" | grep '^ M ' &> /dev/null); then
+      GIT_STATUS="$GIT_PROMPT_MODIFIED$GIT_STATUS"
+    elif $(echo "$GIT_INDEX" | grep '^AM ' &> /dev/null); then
+      GIT_STATUS="$GIT_PROMPT_MODIFIED$GIT_STATUS"
+    elif $(echo "$GIT_INDEX" | grep '^ T ' &> /dev/null); then
+      GIT_STATUS="$GIT_PROMPT_MODIFIED$GIT_STATUS"
+    fi
+    if $(echo "$GIT_INDEX" | grep '^R  ' &> /dev/null); then
+      GIT_STATUS="$GIT_PROMPT_RENAMED$GIT_STATUS"
+    fi
+    if $(echo "$GIT_INDEX" | grep '^ D ' &> /dev/null); then
+      GIT_STATUS="$GIT_PROMPT_DELETED$GIT_STATUS"
+    elif $(echo "$GIT_INDEX" | grep '^AD ' &> /dev/null); then
+      GIT_STATUS="$GIT_PROMPT_DELETED$GIT_STATUS"
+    fi
+    if $(echo "$GIT_INDEX" | grep '^UU ' &> /dev/null); then
+      GIT_STATUS="$GIT_PROMPT_UNMERGED$GIT_STATUS"
+    fi
+    echo "%{$fg[yellow]%}${GIT_STATUS}%{${reset_color}%}"
+}
+
+GIT_PROMPT_COLOR_DIRTY="%{$fg[red]%}"
+GIT_PROMPT_COLOR_CLEAN="%{$fg[green]%}"
+function git_prompt_color {
+    if [[ -n $(git status -s --ignore-submodules=dirty 2> /dev/null) ]]; then
+      echo "${GIT_PROMPT_COLOR_DIRTY}"
+    else
+      echo "${GIT_PROMPT_COLOR_CLEAN}"
+    fi
 }
 
 if [[ -n "$WINDOW" ]]; then
     function preexec() {
-        _update_rprompt
+        update_rprompt
         local cmd=${1[(wr)^(*=*|sudo|vi|lv|ssh|-*)]}
         echo -ne "\ek$cmd\e\\"
     }
 
     function precmd() {
-        _update_rprompt
+        update_rprompt
         local cwd=`print -nP %~`
         echo -n "\ek$cwd:t/\e\\"
     }
 else
     function preexec() {
-        _update_rprompt
+        update_rprompt
     }
 
     function precmd() {
-        _update_rprompt
+        update_rprompt
     }
 
 fi
