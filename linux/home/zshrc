@@ -29,15 +29,7 @@ PROMPT2="%{$fg[yellow]%}${DOMAIN}%{${reset_color}%} %{$fg[red]%}%n@%m> %{${reset
 
 
 function update_rprompt () {
-    GIT_CURRENT_BRANCH=$( git branch &> /dev/null | grep '^\*' | cut -b 3- )
-    if [ ${GIT_CURRENT_BRANCH} ]
-    then
-        GIT_PROMPT="$( git_prompt_color )$paren[1]branch:${GIT_CURRENT_BRANCH}$paren[2]%{${reset_color}%}$( git_status )"
-    else
-        GIT_PROMPT=""
-    fi
-    CURRENT_PATH="%{$fg[cyan]%}$paren[1]%~$paren[2]%{${reset_color}%}"
-    RPROMPT="${GIT_PROMPT}${CURRENT_PATH}"
+    RPROMPT="$( git_prompt )$( current_path_prompt )"
 }
 
 GIT_PROMPT_ADDED="(added)"
@@ -46,6 +38,18 @@ GIT_PROMPT_DELETED="(deleted)"
 GIT_PROMPT_RENAMED="(renamed)"
 GIT_PROMPT_UNMERGED="(unmerged)"
 GIT_PROMPT_UNTRACKED="(untracked)"
+
+function current_path_prompt {
+    echo "%{$fg[cyan]%}$paren[1]%~$paren[2]%{${reset_color}%}"
+}
+function git_prompt {
+    GIT_CURRENT_BRANCH=$( git branch &> /dev/null | grep '^\*' | cut -b 3- )
+    if [ ${GIT_CURRENT_BRANCH} ]
+    then
+        GIT_BRANCH="$( git_prompt_color )$paren[1]branch:${GIT_CURRENT_BRANCH}$paren[2]%{${reset_color}%}"
+        echo "${GIT_BRANCH}$( git_status )"
+    fi
+}
 
 function git_status {
     GIT_INDEX=$(git status --porcelain 2> /dev/null)
