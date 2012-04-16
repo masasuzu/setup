@@ -7,6 +7,11 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 Bundle 'thinca/vim-quickrun'
 Bundle 'scrooloose/nerdtree'
+Bundle 'Shougo/vimshell'
+Bundle 'Shougo/vimproc'
+Bundle 'Source-Explorer-srcexpl.vim'
+Bundle 'trinity.vim'
+Bundle 'taglist.vim'
 
 filetype plugin indent on
 
