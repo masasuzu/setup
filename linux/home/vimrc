@@ -48,8 +48,13 @@ set smartcase
 
 " ステータス行の表示
 set laststatus=2
+set statusline+=[ENCODE=%{&fileencoding}]
+set statusline+=[FORMAT=%{&ff}]
+set statusline+=[TYPE=%Y]
+set statusline+=[LEN=%L]
+set statusline+=[POS=%04l,%04v]
+set statusline+=[%p%%]
 set statusline+=[%F]
-set statusline+=[%{&fileencoding}]
 
 set cmdheight=2
 set showcmd
