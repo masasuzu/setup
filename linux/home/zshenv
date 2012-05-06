@@ -12,7 +12,12 @@ fi
 
 # インタラクティブシェルで起動するとzprofileを読まないので
 if [ ! ${LOGIN_SHELL} ]; then
-    export DOMAIN="[ LOCAL(i) ]"
+    if [ ${DOMAIN} ]; then
+        DOMAIN="${DOMAIN}(i)"
+    else
+        DOMAIN="[ LOCAL ](i)"
+    fi
+
 fi
 
 # シェルスクリプトを実行するときいろいろ困るので
