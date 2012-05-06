@@ -3,7 +3,7 @@
 # fix $HOST
 case "${HOST/.*/}" in
 philippe|henry)
-    DOMAIN="[ LOCAL ]"
+    DOMAIN="[ LOCAL(l) ]"
     ;;
 leon)
     DOMAIN="[ INTRA ]"

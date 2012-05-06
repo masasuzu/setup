@@ -11,10 +11,9 @@ then
 fi
 
 # インタラクティブシェルで起動するとzprofileを読まないので
-if [ ! ${DOMAIN} ]; then
-    export DOMAIN="[ LOCAL ]"
+if [ ! ${LOGIN_SHELL} ]; then
+    export DOMAIN="[ LOCAL(i) ]"
 fi
 
 # シェルスクリプトを実行するときいろいろ困るので
 source "${HOME}/.zsh/devenv"
-
