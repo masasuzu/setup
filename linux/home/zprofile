@@ -20,6 +20,7 @@ export PAGER="lv -c"
 
 if [ -f ${HOME}/.zsh/workprofile ]
 then
+    echo hoge
     source ${HOME}/.zsh/workprofile
 else
     source ${HOME}/.zsh/devprofile

@@ -1,3 +1,5 @@
+# vim:ft=zsh:
+
 if [ -d ${HOME}/perl5 ]
 then
     source ${HOME}/perl5/perlbrew/etc/bashrc

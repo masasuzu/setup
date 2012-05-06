@@ -1,0 +1,11 @@
+# vim:ft=zsh:
+
+path=(
+    {/usr/{/local,},}/{,s}bin
+)
+
+# インタラクティブシェルで起動するとzprofileを読まないので
+if [ ! ${DOMAIN} ]; then
+    export DOMAIN="[ LOCAL ]"
+fi
+

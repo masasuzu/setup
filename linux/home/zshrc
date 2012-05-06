@@ -10,12 +10,11 @@ setopt transient_rprompt
 setopt prompt_percent
 
 paren="()"
-color="38;5;40"
-suff="%%"
+PROMPT_SUFFIX="%%"
+PROMPT_SUFFIX2="\>"
 
 if [[ -n "$LOGIN_SHELL" ]]; then
     paren="[]"
-    color="38;5;45"
 fi
 
 if [[ $UID = 0 ]]; then
@@ -24,9 +23,29 @@ fi
 
 autoload -U colors; colors;
 
-PROMPT="%{$fg_bold[yellow]%}${DOMAIN}%{${reset_color}%} %{$fg[cyan]%}%n@%m%${suff} %{${reset_color}%} "
-PROMPT2="%{$fg[yellow]%}${DOMAIN}%{${reset_color}%} %{$fg[red]%}%n@%m> %{${reset_color}%} "
 
+function domain_prompt () {
+    if [ ${LOGIN_SHELL} ]; then
+        DOMAIN_DOLOR="yellow"
+    else
+        DOMAIN_DOLOR="red"
+    fi
+
+    echo "%{$fg_bold[$DOMAIN_DOLOR]%}${DOMAIN}%{${reset_color}%}"
+}
+function host_prompt () {
+    echo "%{$fg[cyan]%}%n@%m%${PROMPT_SUFFIX} %{${reset_color}%} "
+}
+
+function domain_prompt2 () {
+    echo "%{$fg[yellow]%}${DOMAIN}%{${reset_color}%}"
+}
+function host_prompt2 () {
+    echo "%{$fg[magenta]%}%n@%m%${PROMPT_SUFFIX2}%{${reset_color}%} "
+}
+
+PROMPT="$(  domain_prompt  ) $( host_prompt  )"
+PROMPT2="$( domain_prompt2 ) $( host_prompt2 )"
 
 function update_rprompt () {
     RPROMPT="$( git_prompt )$( current_path_prompt )"

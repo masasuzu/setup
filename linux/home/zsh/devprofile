@@ -1,6 +1,4 @@
-path=(
-    {/usr/{/local,},}/{,s}bin
-)
+# vim:ft=zsh:
 
 # fix $HOST
 case "${HOST/.*/}" in

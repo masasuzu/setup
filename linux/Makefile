@@ -9,6 +9,7 @@ env:
 	mkdir -p ${HOME}/tmp
 	mkdir -p ${HOME}/bin
 	ln -fs  `pwd`/home/zshrc            ${HOME}/.zshrc
+	ln -fs  `pwd`/home/zshenv           ${HOME}/.zshenv
 	ln -fs  `pwd`/home/zsh/devrc        ${HOME}/.zsh/devrc
 	ln -fs  `pwd`/home/zsh/devprofile   ${HOME}/.zsh/devprofile
 	ln -fs  `pwd`/home/zprofile         ${HOME}/.zprofile
