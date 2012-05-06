@@ -4,7 +4,7 @@ path=(
 
 # fix $HOST
 case "${HOST/.*/}" in
-philippe)
+philippe|henry)
     DOMAIN="[ LOCAL ]"
     ;;
 leon)
