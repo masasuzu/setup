@@ -259,8 +259,8 @@ if [ `uname` != 'Darwin' ]
 then
     alias ls='ls --color=auto'
 fi
-alias ll="ls -l"
-alias la="ls -laF"
+alias ll="ls -lh"
+alias la="ls -lahF"
 
 alias cl="clear"
 alias vi="vim"
