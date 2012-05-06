@@ -10,8 +10,11 @@ env:
 	mkdir -p ${HOME}/bin
 	ln -fs  `pwd`/home/zshrc            ${HOME}/.zshrc
 	ln -fs  `pwd`/home/zshenv           ${HOME}/.zshenv
-	ln -fs  `pwd`/home/zsh/devrc        ${HOME}/.zsh/devrc
+	ln -fs  `pwd`/home/zsh/prompt       ${HOME}/.zsh/prompt
+	ln -fs  `pwd`/home/zsh/functions    ${HOME}/.zsh/functions
+	ln -fs  `pwd`/home/zsh/alias        ${HOME}/.zsh/alias
 	ln -fs  `pwd`/home/zsh/devprofile   ${HOME}/.zsh/devprofile
+	ln -fs  `pwd`/home/zsh/devenv       ${HOME}/.zsh/devenv
 	ln -fs  `pwd`/home/zprofile         ${HOME}/.zprofile
 	ln -fs  `pwd`/home/tscreenrc        ${HOME}/.tscreenrc
 	ln -fs  `pwd`/home/vimrc            ${HOME}/.vimrc

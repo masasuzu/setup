@@ -1,5 +1,5 @@
+# vim:ft=zsh:
 # ~/.zshrc
-#
 # =======================================================================
 # prompt
 # -----------------------------------------------------------------------
@@ -9,131 +9,6 @@ setopt prompt_cr
 setopt transient_rprompt
 setopt prompt_percent
 
-paren="()"
-PROMPT_SUFFIX="%%"
-PROMPT_SUFFIX2="\>"
-
-if [[ -n "$LOGIN_SHELL" ]]; then
-    paren="[]"
-fi
-
-if [[ $UID = 0 ]]; then
-    suff='#'
-fi
-
-autoload -U colors; colors;
-
-
-function domain_prompt () {
-    if [ ${LOGIN_SHELL} ]; then
-        DOMAIN_DOLOR="yellow"
-    else
-        DOMAIN_DOLOR="red"
-    fi
-
-    echo "%{$fg_bold[$DOMAIN_DOLOR]%}${DOMAIN}%{${reset_color}%}"
-}
-function host_prompt () {
-    echo "%{$fg[cyan]%}%n@%m%${PROMPT_SUFFIX} %{${reset_color}%} "
-}
-
-function domain_prompt2 () {
-    echo "%{$fg[yellow]%}${DOMAIN}%{${reset_color}%}"
-}
-function host_prompt2 () {
-    echo "%{$fg[magenta]%}%n@%m%${PROMPT_SUFFIX2}%{${reset_color}%} "
-}
-
-PROMPT="$(  domain_prompt  ) $( host_prompt  )"
-PROMPT2="$( domain_prompt2 ) $( host_prompt2 )"
-
-function update_rprompt () {
-    RPROMPT="$( git_prompt )$( current_path_prompt )"
-}
-
-GIT_PROMPT_ADDED="(added)"
-GIT_PROMPT_MODIFIED="(modified)"
-GIT_PROMPT_DELETED="(deleted)"
-GIT_PROMPT_RENAMED="(renamed)"
-GIT_PROMPT_UNMERGED="(unmerged)"
-GIT_PROMPT_UNTRACKED="(untracked)"
-
-function current_path_prompt {
-    echo "%{$fg[cyan]%}$paren[1]%~$paren[2]%{${reset_color}%}"
-}
-function git_prompt {
-    GIT_CURRENT_BRANCH=$( git branch &> /dev/null | grep '^\*' | cut -b 3- )
-    if [ ${GIT_CURRENT_BRANCH} ]
-    then
-        GIT_BRANCH="$( git_prompt_color )$paren[1]branch:${GIT_CURRENT_BRANCH}$paren[2]%{${reset_color}%}"
-        echo "${GIT_BRANCH}$( git_status )"
-    fi
-}
-
-function git_status {
-    GIT_INDEX=$(git status --porcelain 2> /dev/null)
-    GIT_STATUS=''
-    if $(echo "$GIT_INDEX" | grep '^?? ' &> /dev/null); then
-      GIT_STATUS="$GIT_PROMPT_UNTRACKED$GIT_STATUS"
-    fi
-    if $(echo "$GIT_INDEX" | grep '^A  ' &> /dev/null); then
-      GIT_STATUS="$GIT_PROMPT_ADDED$GIT_STATUS"
-    elif $(echo "$GIT_INDEX" | grep '^M  ' &> /dev/null); then
-      GIT_STATUS="$GIT_PROMPT_ADDED$GIT_STATUS"
-    fi
-    if $(echo "$GIT_INDEX" | grep '^ M ' &> /dev/null); then
-      GIT_STATUS="$GIT_PROMPT_MODIFIED$GIT_STATUS"
-    elif $(echo "$GIT_INDEX" | grep '^AM ' &> /dev/null); then
-      GIT_STATUS="$GIT_PROMPT_MODIFIED$GIT_STATUS"
-    elif $(echo "$GIT_INDEX" | grep '^ T ' &> /dev/null); then
-      GIT_STATUS="$GIT_PROMPT_MODIFIED$GIT_STATUS"
-    fi
-    if $(echo "$GIT_INDEX" | grep '^R  ' &> /dev/null); then
-      GIT_STATUS="$GIT_PROMPT_RENAMED$GIT_STATUS"
-    fi
-    if $(echo "$GIT_INDEX" | grep '^ D ' &> /dev/null); then
-      GIT_STATUS="$GIT_PROMPT_DELETED$GIT_STATUS"
-    elif $(echo "$GIT_INDEX" | grep '^AD ' &> /dev/null); then
-      GIT_STATUS="$GIT_PROMPT_DELETED$GIT_STATUS"
-    fi
-    if $(echo "$GIT_INDEX" | grep '^UU ' &> /dev/null); then
-      GIT_STATUS="$GIT_PROMPT_UNMERGED$GIT_STATUS"
-    fi
-    echo "%{$fg[yellow]%}${GIT_STATUS}%{${reset_color}%}"
-}
-
-GIT_PROMPT_COLOR_DIRTY="%{$fg[red]%}"
-GIT_PROMPT_COLOR_CLEAN="%{$fg[green]%}"
-function git_prompt_color {
-    if [[ -n $(git status -s --ignore-submodules=dirty 2> /dev/null) ]]; then
-      echo "${GIT_PROMPT_COLOR_DIRTY}"
-    else
-      echo "${GIT_PROMPT_COLOR_CLEAN}"
-    fi
-}
-
-if [[ -n "$WINDOW" ]]; then
-    function preexec() {
-        update_rprompt
-        local cmd=${1[(wr)^(*=*|sudo|vi|lv|ssh|-*)]}
-        echo -ne "\ek$cmd\e\\"
-    }
-
-    function precmd() {
-        update_rprompt
-        local cwd=`print -nP %~`
-        echo -n "\ek$cwd:t/\e\\"
-    }
-else
-    function preexec() {
-        update_rprompt
-    }
-
-    function precmd() {
-        update_rprompt
-    }
-
-fi
 
 # =======================================================================
 # history
@@ -216,7 +91,6 @@ setopt auto_pushd
 if type ggrep > /dev/null 2>&1; then
     alias grep=ggrep
 fi
-export GREP_OPTIONS
 GREP_OPTIONS="--binary-files=without-match"
 if [ `uname` != 'Darwin' ]
 then
@@ -224,15 +98,13 @@ then
 fi
 GREP_OPTIONS="--exclude=\*.tmp $GREP_OPTIONS"
 if grep --help | grep -q -- --exclude-dir; then
-    GREP_OPTIONS="--exclude-dir=.svn $GREP_OPTIONS"
-    GREP_OPTIONS="--exclude-dir=.git $GREP_OPTIONS"
-    GREP_OPTIONS="--exclude-dir=.deps $GREP_OPTIONS"
-    GREP_OPTIONS="--exclude-dir=.libs $GREP_OPTIONS"
+    GREP_OPTIONS="--exclude-dir=.svn --exclude-dir=.git --exclude-dir=.deps --exclude-dir=.libs $GREP_OPTIONS"
 fi
 
 if grep --help | grep -q -- --color; then
     GREP_OPTIONS="--color=auto $GREP_OPTIONS"
 fi
+export GREP_OPTIONS
 
 # =======================================================================
 # process
@@ -244,103 +116,24 @@ setopt magic_equal_subst
 # =======================================================================
 # keyboard
 # -----------------------------------------------------------------------
-
 setopt ignore_eof
 setopt NO_flow_control
 setopt NO_hup
-
-# =======================================================================
-# alias
-# -----------------------------------------------------------------------
-
-setopt complete_aliases
-
-if [ `uname` != 'Darwin' ]
-then
-    alias ls='ls --color=auto'
-fi
-alias ll="ls -lh"
-alias la="ls -lahF"
-
-alias cl="clear"
-alias vi="vim"
-alias datetime="perl -e 'print localtime . qq{\n}'"
-alias pm="perldoc -m"
-
-alias apt-up="sudo aptitude update && sudo aptitude safe-upgrade"
-alias apt-i="sudo aptitude install"
-
-alias -g L="| lv"
-alias -g T="| tail"
-alias -g H="| head"
-alias -g G="| grep"
-alias -g W="| wc"
-
-alias refenv="source ${HOME}/.zshrc"
-
-# screen
-alias screen=`which tscreen`
-alias rs='screen -rd'
-alias ns='screen -S'
-
-function applog() {
-    if [ -d ${HOME}/var/log/apache ]
-    then
-        multitail -f ${HOME}/var/log/apache/`date +%Y`/`date +%m`/error.`date +%Y_%m%d`.log ${HOME}/var/log/apache/`date +%Y`/`date +%m`/combined.`date +%Y_%m%d`.log
-    else
-        sudo multitail /var/log/apache2/error.log /var/log/apache2/access.log
-    fi
-}
-
-function errorlog() {
-    if [ -d ${HOME}/var/log/apache ]
-    then
-        tail -f ${HOME}/var/log/apache/`date +%Y`/`date +%m`/error.`date +%Y_%m%d`.log
-    else
-        sudo tail -f /var/log/apache2/error.log
-    fi
-}
-
-function lv-errorlog() {
-    if [ -d ${HOME}/var/log/apache ]
-    then
-        lv ${HOME}/var/log/apache/`date +%Y`/`date +%m`/error.`date +%Y_%m%d`.log
-    else
-        sudo lv -f /var/log/apache2/error.log
-    fi
-}
-
-function combinedlog() {
-    if [ -d ${HOME}/var/log/apache ]
-    then
-        tail -f ${HOME}/var/log/apache/`date +%Y`/`date +%m`/combined.`date +%Y_%m%d`.log
-    else
-        sudo tail -f /var/log/apache2/access.log
-    fi
-}
-
-function cdl() {
-    if [ -d ~/project/$1/site_perl/ ]
-    then
-        cd ~/project/$1/site_perl/$1
-    else
-        cd ~/project/$1/lib/$1
-    fi
-}
-
-function cdp() {
-    cd ~/project/$1/
-}
-
-PATH=${PATH}:${HOME}/bin:${HOME}/usr/local/bin:${HOME}/opt/bin
-LANG=ja_JP.UTF-8; export LANG
 
 
 ## 実行したプロセスの消費時間が3秒以上かかったら
 ## 自動的に消費時間の統計情報を表示する。
 REPORTTIME=3
 
-source ${HOME}/.zsh/devrc
+export PATH=${PATH}:${HOME}/bin:${HOME}/usr/local/bin:${HOME}/opt/bin
+export PAGER="lv -c"
+export LANG="ja_JP.UTF-8"
+export EDITOR=vim
+
+source "${HOME}/.zsh/prompt"
+source "${HOME}/.zsh/functions"
+source "${HOME}/.zsh/alias"
+
 
 # ~/.zshrc
 

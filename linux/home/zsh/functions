@@ -1,0 +1,50 @@
+# vim:ft=zsh:
+function applog() {
+    if [ -d ${HOME}/var/log/apache ]
+    then
+        multitail -f ${HOME}/var/log/apache/`date +%Y`/`date +%m`/error.`date +%Y_%m%d`.log ${HOME}/var/log/apache/`date +%Y`/`date +%m`/combined.`date +%Y_%m%d`.log
+    else
+        sudo multitail /var/log/apache2/error.log /var/log/apache2/access.log
+    fi
+}
+
+function errorlog() {
+    if [ -d ${HOME}/var/log/apache ]
+    then
+        tail -f ${HOME}/var/log/apache/`date +%Y`/`date +%m`/error.`date +%Y_%m%d`.log
+    else
+        sudo tail -f /var/log/apache2/error.log
+    fi
+}
+
+function lv-errorlog() {
+    if [ -d ${HOME}/var/log/apache ]
+    then
+        lv ${HOME}/var/log/apache/`date +%Y`/`date +%m`/error.`date +%Y_%m%d`.log
+    else
+        sudo lv -f /var/log/apache2/error.log
+    fi
+}
+
+function combinedlog() {
+    if [ -d ${HOME}/var/log/apache ]
+    then
+        tail -f ${HOME}/var/log/apache/`date +%Y`/`date +%m`/combined.`date +%Y_%m%d`.log
+    else
+        sudo tail -f /var/log/apache2/access.log
+    fi
+}
+
+function cdl() {
+    if [ -d ~/project/$1/site_perl/ ]
+    then
+        cd ~/project/$1/site_perl/$1
+    else
+        cd ~/project/$1/lib/$1
+    fi
+}
+
+function cdp() {
+    cd ~/project/$1/
+}
+

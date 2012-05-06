@@ -4,8 +4,17 @@ path=(
     {/usr/{/local,},}/{,s}bin
 )
 
+limit coredumpsize 0
+if [ `uname` != 'Darwin' ]
+then
+    eval `dircolors $HOME/etc/dircolors`
+fi
+
 # インタラクティブシェルで起動するとzprofileを読まないので
 if [ ! ${DOMAIN} ]; then
     export DOMAIN="[ LOCAL ]"
 fi
+
+# シェルスクリプトを実行するときいろいろ困るので
+source "${HOME}/.zsh/devenv"
 

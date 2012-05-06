@@ -1,0 +1,37 @@
+# vim:ft=zsh:
+
+# =======================================================================
+# alias
+# -----------------------------------------------------------------------
+
+setopt complete_aliases
+
+if [ `uname` != 'Darwin' ]
+then
+    alias ls='ls --color=auto'
+fi
+alias ll="ls -lh"
+alias la="ls -lahF"
+
+alias cl="clear"
+alias vi="vim"
+alias datetime="perl -e 'print localtime . qq{\n}'"
+alias pm="perldoc -m"
+
+alias apt-up="sudo aptitude update && sudo aptitude safe-upgrade"
+alias apt-i="sudo aptitude install"
+
+alias -g L="| lv"
+alias -g T="| tail"
+alias -g H="| head"
+alias -g G="| grep"
+alias -g W="| wc"
+
+alias refenv="source ${HOME}/.zshrc"
+
+# screen
+alias screen=`which tscreen`
+alias rs='screen -rd'
+alias ns='screen -S'
+
+

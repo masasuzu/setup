@@ -1,29 +1,17 @@
-#
+# vim:ft=zsh:
 # .zprofile
-#
 
 LOGIN_SHELL=1
 
 stty -ixon
 umask 022
 
-limit coredumpsize 0
-if [ `uname` != 'Darwin' ]
-then
-    eval `dircolors $HOME/etc/dircolors`
-fi
-
-export LANG=ja_JP.utf8
-
-export EDITOR=vim
 export PAGER="lv -c"
 
 if [ -f ${HOME}/.zsh/workprofile ]
 then
-    echo hoge
     source ${HOME}/.zsh/workprofile
 else
     source ${HOME}/.zsh/devprofile
 fi
 
-# .zprofile
