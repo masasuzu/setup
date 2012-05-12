@@ -1,16 +1,8 @@
 # 基本的にdebian lenny用のセットアップスクリプト
 
 ### スクリプトを動かす前に、rootで実行
-aptitude update && aptitude safe-upgrade && aptitude install -y vim ssh zsh git-core sudo make  &&\
-sed -i.bak -e 's/\/home\/masasuzu:\/bin\/bash/\/home\/masasuzu:\/bin\/zsh/' /etc/passwd &&\
-sed -i.bak -e 's/sudo:x:27:/sudo:x:27:masasuzu/' /etc/group &&\
-chmod o+r -R /usr/share/git-core/templates # 今のバージョンだとこれいらないかも
+aptitude update && aptitude safe-upgrade && aptitude install -y vim ssh zsh git-core sudo curl build-essential lv
 
-### masasuzuにログインして
-# 基本Windowsマシンからしかログインしないのでこぴってくる。
-mkdir .ssh
-chmod 700 .ssh
-scp '192.168.1.31:${HOME}/.ssh/*' ${HOME}/.ssh/
 
 # setup用プロジェクトを落としてくる
 mkdir project
@@ -19,9 +11,7 @@ git clone git@github.com:masasuzu/setup.git
 cp ${HOME}/project/setup/linux/
 
 # setup for debian lenny
-${HOME}/project/setup/linux/debian_setu@/setup.sh
-
-# 各種設定
-make setup
+${HOME}/project/setup/linux/
+make
 
 で、再ログイン
