@@ -16,6 +16,7 @@ lab)
     ;;
 *)
     print ".zsh/devprofile: $HOST: unkown hostname"
+    DOMAIN="[ UNKNOWN ]"
     ;;
 esac
 export DOMAIN
