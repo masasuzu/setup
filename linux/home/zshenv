@@ -1,7 +1,7 @@
 # vim:ft=zsh:
 
 path=(
-    {/usr/{/local,},}/{,s}bin
+    {,${HOME}}{/usr/{/local,},}/{,s}bin
 )
 
 limit coredumpsize 0
