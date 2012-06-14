@@ -8,6 +8,9 @@ philippe|henry)
 leon)
     DOMAIN="[ INTRA ]"
     ;;
+eve|marie)
+    DOMAIN="[ VM-INTRA ]"
+    ;;
 lenny*|squeeze*)
     DOMAIN="[ LAB ]"
     ;;
