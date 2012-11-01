@@ -14,7 +14,7 @@ eve|marie)
 lenny*|squeeze*)
     DOMAIN="[ LAB ]"
     ;;
-lab)
+lab*)
     DOMAIN="[ VPS-LAB ]"
     ;;
 *)

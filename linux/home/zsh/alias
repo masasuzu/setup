@@ -32,7 +32,10 @@ alias -g W="| wc"
 alias refenv="source ${HOME}/.zshrc"
 
 # screen
-alias screen=`which tscreen`
+if [ -f /usr/loal/tscreen ]
+then
+    alias screen=`which tscreen`
+fi
 alias rs='screen -rd'
 alias ns='screen -S'
 
