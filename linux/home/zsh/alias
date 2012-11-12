@@ -32,8 +32,9 @@ alias -g W="| wc"
 alias refenv="source ${HOME}/.zshrc"
 
 # screen
-if [ -f /usr/loal/tscreen ]
+if [ $(which tscreen) ]
 then
+    echo;
     alias screen=`which tscreen`
 fi
 alias rs='screen -rd'
