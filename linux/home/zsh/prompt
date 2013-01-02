@@ -35,8 +35,12 @@ function host_prompt2 () {
     echo "%{$fg[magenta]%}%n@%m%${PROMPT_SUFFIX2}%{${reset_color}%} "
 }
 
+function hms() {
+    echo $(date +'%H:%M:%S')
+}
+
 function last_command_status () {
-    echo "%(?.%F{green}^-^%f.%F{red}@_@%f)"
+    echo "%(?.%F{green}$( hms )%f.%F{red}$( hms )!%f)"
 }
 
 PROMPT="$(  domain_prompt  ) $( last_command_status ) $( host_prompt  )"
