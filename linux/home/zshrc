@@ -120,7 +120,95 @@ setopt ignore_eof
 setopt NO_flow_control
 setopt NO_hup
 
-## 実行したプロセスの消費時間が3秒以上かかったら
+# =======================================================================
+# alias
+# -----------------------------------------------------------------------
+
+setopt complete_aliases
+
+if [ `uname` != 'Darwin' ]
+then
+    alias ls='ls --color=auto'
+fi
+alias ll="ls -l"
+alias la="ls -laF"
+
+alias cl="clear"
+alias vi="vim"
+alias datetime="perl -e 'print localtime . qq{\n}'"
+alias pm="perldoc -m"
+
+alias apt-up="sudo aptitude update && sudo aptitude safe-upgrade"
+alias apt-i="sudo aptitude install"
+
+alias -g L="| lv"
+alias -g T="| tail"
+alias -g H="| head"
+alias -g G="| grep"
+alias -g W="| wc"
+
+alias refenv="source ${HOME}/.zshrc"
+
+# screen
+alias screen=`which tscreen`
+alias rs='screen -rd'
+alias ns='screen -S'
+
+function applog() {
+    if [ -d ${HOME}/var/log/apache ]
+    then
+        multitail -f ${HOME}/var/log/apache/`date +%Y`/`date +%m`/error.`date +%Y_%m%d`.log ${HOME}/var/log/apache/`date +%Y`/`date +%m`/combined.`date +%Y_%m%d`.log
+    else
+        sudo multitail /var/log/apache2/error.log /var/log/apache2/access.log
+    fi
+}
+
+function errorlog() {
+    if [ -d ${HOME}/var/log/apache ]
+    then
+        tail -f ${HOME}/var/log/apache/`date +%Y`/`date +%m`/error.`date +%Y_%m%d`.log
+    else
+        sudo tail -f /var/log/apache2/error.log
+    fi
+}
+
+function lv-errorlog() {
+    if [ -d ${HOME}/var/log/apache ]
+    then
+        lv ${HOME}/var/log/apache/`date +%Y`/`date +%m`/error.`date +%Y_%m%d`.log
+    else
+        sudo lv -f /var/log/apache2/error.log
+    fi
+}
+
+function combinedlog() {
+    if [ -d ${HOME}/var/log/apache ]
+    then
+        tail -f ${HOME}/var/log/apache/`date +%Y`/`date +%m`/combined.`date +%Y_%m%d`.log
+    else
+        sudo tail -f /var/log/apache2/access.log
+    fi
+}
+
+function cdl() {
+    if [ -d ~/project/$1/site_perl/ ]
+    then
+        cd ~/project/$1/site_perl/$1
+    else
+        cd ~/project/$1/lib/$1
+    fi
+}
+
+function cdp() {
+    cd ~/project/$1/
+}
+
+PATH=${PATH}:${HOME}/bin:${HOME}/usr/local/bin:${HOME}/opt/bin
+LANG=ja_JP.UTF-8; export LANG
+PAGER="lv -c"
+
+
+## 実行したプロセスの消費時間が4秒以上かかったら
 ## 自動的に消費時間の統計情報を表示する。
 REPORTTIME=3
 

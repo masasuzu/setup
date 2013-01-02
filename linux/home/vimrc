@@ -68,6 +68,8 @@ autocmd FileType html set sw=2 ts=2
 autocmd FileType ruby set sw=2 ts=2
 autocmd BufNewFile,BufRead *.psgi set filetype=perl
 autocmd BufNewFile,BufRead *.ru set filetype=ruby
+autocmd BufNewFile,BufRead *.tt set filetype=html
+autocmd BufNewFile,BufRead *.tx set filetype=html
 
 syntax enable
 let perl_no_extended_vars=1
