@@ -40,7 +40,7 @@ function hms() {
 }
 
 function last_command_status () {
-    echo "%(?.%F{green}$( hms )%f.%F{red}$( hms )!%f)"
+    echo "%(?.%{$fg[green]%}$( hms )%{${reset_color}%}.%{$fg[red]%}$( hms )!%{${reset_color}%})"
 }
 
 function update_prompt () {
