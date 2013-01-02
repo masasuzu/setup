@@ -43,10 +43,10 @@ function last_command_status () {
     echo "%(?.%F{green}$( hms )%f.%F{red}$( hms )!%f)"
 }
 
-PROMPT="$(  domain_prompt  ) $( last_command_status ) $( host_prompt  )"
-PROMPT2="$( domain_prompt2 ) $( last_command_status ) $( host_prompt2 )"
+function update_prompt () {
+    PROMPT="$(  domain_prompt  ) $( last_command_status ) $( host_prompt  )"
+    PROMPT2="$( domain_prompt2 ) $( last_command_status ) $( host_prompt2 )"
 
-function update_rprompt () {
     RPROMPT="$( git_prompt )$( current_path_prompt )"
 }
 
@@ -113,22 +113,22 @@ function git_prompt_color {
 
 if [[ -n "$WINDOW" ]]; then
     function preexec() {
-        update_rprompt
+        update_prompt
         local cmd=${1[(wr)^(*=*|sudo|vi|lv|ssh|-*)]}
         echo -ne "\ek$cmd\e\\"
     }
 
     function precmd() {
-        update_rprompt
+        update_prompt
         local cwd=`print -nP %~`
         echo -n "\ek$cwd:t/\e\\"
     }
 else
     function preexec() {
-        update_rprompt
+        update_prompt
     }
 
     function precmd() {
-        update_rprompt
+        update_prompt
     }
 fi
