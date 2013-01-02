@@ -14,6 +14,3 @@ then
 else
     source ${HOME}/.zsh/devprofile
 fi
-# for rbenv
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
