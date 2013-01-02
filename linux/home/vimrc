@@ -80,6 +80,10 @@ autocmd BufNewFile,BufRead *.tx set filetype=html
 syntax enable
 let perl_no_extended_vars=1
 
+"perl
+map ,pt <Esc>:%! perltidy -se<CR>
+map ,ptv <Esc>:'<,'>! perltidy -se<CR>
+
 "----------------------------------------------------
 "" quickrun
 "----------------------------------------------------
