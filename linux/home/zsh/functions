@@ -1,38 +1,27 @@
 # vim:ft=zsh:
+
+function apache_error_log_name() {
+    echo "${HOME}/var/log/apache/$(date +'%Y/%m/error.%Y_%m%d').log"
+}
+
+function apache_combined_log_name() {
+    echo "${HOME}/var/log/apache/$(date +'%Y/%m/combined.%Y_%m%d').log"
+}
+
 function applog() {
-    if [ -d ${HOME}/var/log/apache ]
-    then
-        multitail -f ${HOME}/var/log/apache/`date +%Y`/`date +%m`/error.`date +%Y_%m%d`.log ${HOME}/var/log/apache/`date +%Y`/`date +%m`/combined.`date +%Y_%m%d`.log
-    else
-        sudo multitail /var/log/apache2/error.log /var/log/apache2/access.log
-    fi
+    multitail -f $( apache_error_log_name ) $( apache_combined_log_name )
 }
 
 function errorlog() {
-    if [ -d ${HOME}/var/log/apache ]
-    then
-        tail -f ${HOME}/var/log/apache/`date +%Y`/`date +%m`/error.`date +%Y_%m%d`.log
-    else
-        sudo tail -f /var/log/apache2/error.log
-    fi
+    tail -f $( apache_error_log_name )
 }
 
 function lv-errorlog() {
-    if [ -d ${HOME}/var/log/apache ]
-    then
-        lv ${HOME}/var/log/apache/`date +%Y`/`date +%m`/error.`date +%Y_%m%d`.log
-    else
-        sudo lv -f /var/log/apache2/error.log
-    fi
+    lv $( apache_error_log_name )
 }
 
 function combinedlog() {
-    if [ -d ${HOME}/var/log/apache ]
-    then
-        tail -f ${HOME}/var/log/apache/`date +%Y`/`date +%m`/combined.`date +%Y_%m%d`.log
-    else
-        sudo tail -f /var/log/apache2/access.log
-    fi
+    tail -f $( apache_combined_log_name )
 }
 
 function cdl() {
