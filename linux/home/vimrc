@@ -11,7 +11,6 @@ Bundle 'Shougo/vimshell'
 Bundle 'Shougo/vimproc'
 Bundle 'Source-Explorer-srcexpl.vim'
 Bundle 'trinity.vim'
-"Bundle 'taglist.vim'
 Bundle 'petdance/vim-perl'
 
 Bundle 'hotchpotch/perldoc-vim'

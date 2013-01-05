@@ -114,7 +114,7 @@ function git_prompt_color {
 if [[ -n "$WINDOW" ]]; then
     function preexec() {
         update_prompt
-        local cmd=${1[(wr)^(*=*|sudo|vi|lv|ssh|-*)]}
+        local cmd=${1[(wr)^(*=*|sudo|vim|vi|lv|ssh|-*)]}
         echo -ne "\ek$cmd\e\\"
     }
 

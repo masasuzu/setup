@@ -1,5 +1,4 @@
 escape ^ZZ
-
 hardstatus alwayslastline "[%m/%d %0c] %0`%-w%{= bW}%n %t%{-}%+w"
 caption splitonly
 
