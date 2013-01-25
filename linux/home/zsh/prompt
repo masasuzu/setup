@@ -1,16 +1,12 @@
 # vim:ft=zsh:
 
 PROMPT_PAREN="()"
-PROMPT_SUFFIX="%%"
 PROMPT_SUFFIX2="\>"
 
 if [[ -n "$LOGIN_SHELL" ]]; then
     PROMPT_PAREN="[]"
 fi
 
-if [[ $UID = 0 ]]; then
-    suff='#'
-fi
 
 autoload -U colors; colors;
 
@@ -25,7 +21,7 @@ function domain_prompt () {
     echo "%{$fg_bold[$DOMAIN_DOLOR]%}${DOMAIN}%{${reset_color}%}"
 }
 function host_prompt () {
-    echo "%{$fg[cyan]%}%n@%m%${PROMPT_SUFFIX} %{${reset_color}%} "
+    echo "%{$fg[cyan]%}%n@%m%#%{${reset_color}%} "
 }
 
 function domain_prompt2 () {
