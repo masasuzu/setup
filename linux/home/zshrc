@@ -97,11 +97,11 @@ then
     GREP_OPTIONS="--directories=recurse $GREP_OPTIONS"
 fi
 GREP_OPTIONS="--exclude=\*.tmp $GREP_OPTIONS"
-if grep --help | grep -q -- --exclude-dir; then
+if grep --help 2>&1 | grep -q -- --exclude-dir; then
     GREP_OPTIONS="--exclude-dir=.svn --exclude-dir=.git --exclude-dir=.deps --exclude-dir=.libs $GREP_OPTIONS"
 fi
 
-if grep --help | grep -q -- --color; then
+if grep --help 2>&1 | grep -q -- --color; then
     GREP_OPTIONS="--color=auto $GREP_OPTIONS"
 fi
 export GREP_OPTIONS
