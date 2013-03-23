@@ -31,13 +31,3 @@ alias -g W="| wc"
 
 alias refenv="source ${HOME}/.zshrc"
 
-# screen
-if [ $(which tscreen) ]
-then
-    echo;
-    alias screen=`which tscreen`
-fi
-alias rs='screen -rd'
-alias ns='screen -S'
-
-

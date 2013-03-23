@@ -2,7 +2,7 @@
 
 # fix $HOST
 case "${HOST/.*/}" in
-philippe|henry)
+jean|philippe|henry)
     DOMAIN="[ LOCAL ]"
     ;;
 leon)
