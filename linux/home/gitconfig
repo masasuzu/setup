@@ -15,3 +15,5 @@
 
 [github]
 	user = masasuzu
+[push]
+	default = simple
