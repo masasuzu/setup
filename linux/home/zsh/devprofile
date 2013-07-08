@@ -18,7 +18,6 @@ lab*)
     DOMAIN="[ VPS-LAB ]"
     ;;
 *)
-    print ".zsh/devprofile: $HOST: unkown hostname"
     DOMAIN="[ UNKNOWN ]"
     ;;
 esac
