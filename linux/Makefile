@@ -17,6 +17,7 @@ env:
 	ln -fs  `pwd`/home/zsh/devenv       ${HOME}/.zsh/devenv
 	ln -fs  `pwd`/home/zprofile         ${HOME}/.zprofile
 	ln -fs  `pwd`/home/tscreenrc        ${HOME}/.tscreenrc
+	ln -fs  `pwd`/home/tmux.conf        ${HOME}/.tmux.conf
 	ln -fs  `pwd`/home/vimrc            ${HOME}/.vimrc
 	ln -fsn `pwd`/home/vim              ${HOME}/.vim
 	ln -fsn `pwd`/home/etc              ${HOME}/etc
