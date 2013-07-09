@@ -10,11 +10,6 @@ then
     source ${HOME}/.pythonbrew/etc/bashrc
 fi
 
-#if [ -d ${HOME}/.rvm ]
-#then
-#    source "$HOME/.rvm/scripts/rvm" # Load RVM function
-#fi
-
 if [ -d $HOME/.nvm ]
 then
     source ~/.nvm/nvm.sh

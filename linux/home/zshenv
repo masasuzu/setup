@@ -11,7 +11,7 @@ then
 fi
 
 # インタラクティブシェルで起動するとzprofileを読まないので
-if [ ! ${LOGIN_SHELL} ]; then
+if [ ! ${LOGIN_SHELL:-} ]; then
     if [ ${DOMAIN} ]; then
         DOMAIN="${DOMAIN}(i)"
     else

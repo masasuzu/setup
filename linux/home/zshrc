@@ -9,7 +9,6 @@ setopt prompt_cr
 setopt transient_rprompt
 setopt prompt_percent
 
-
 # =======================================================================
 # history
 # -----------------------------------------------------------------------
@@ -172,5 +171,7 @@ source "${HOME}/.zsh/prompt"
 source "${HOME}/.zsh/functions"
 source "${HOME}/.zsh/alias"
 
-
+PATH="$HOME/.anyenv/bin:$PATH"
+export PATH
+eval "$(anyenv init -)"
 # ~/.zshrc
