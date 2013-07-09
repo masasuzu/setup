@@ -15,3 +15,21 @@ then
     source ~/.nvm/nvm.sh
 fi
 
+if [ -d $HOME/.nodebrew ]
+then
+    # for nodebrew
+    export PATH=$HOME/.nodebrew/current/bin:$PATH
+fi
+
+if [ -d $HOME/.rbenv ]
+then
+    # for rbenv
+    export PATH="$HOME/.rbenv/bin:$PATH"
+    eval "$(rbenv init -)"
+fi
+
+if [ -d $HOME/.anyenv ]
+then
+    export PATH="$HOME/.anyenv/bin:$PATH"
+    eval "$(anyenv init -)"
+fi
