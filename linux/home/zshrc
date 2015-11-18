@@ -172,3 +172,10 @@ source "${HOME}/.zsh/functions"
 source "${HOME}/.zsh/alias"
 
 # ~/.zshrc
+if [ -d "$HOME/.anyenv/" ]; then
+    export PATH="$HOME/.anyenv/bin:$PATH"
+    eval "$(anyenv init -)"
+fi
+
+export GOPATH=$HOME/go
+export PATH=$PATH:/usr/local/opt/go/libexec/bin:$GOPATH/bin

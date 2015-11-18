@@ -33,3 +33,9 @@ then
     export PATH="$HOME/.anyenv/bin:$PATH"
     eval "$(anyenv init -)"
 fi
+
+if which ndenv > /dev/null
+then
+    export PATH="$HOME/.ndenv/bin:$PATH"
+    eval "$(ndenv init -)"
+fi
