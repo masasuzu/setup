@@ -90,20 +90,6 @@ setopt auto_pushd
 if type ggrep > /dev/null 2>&1; then
     alias grep=ggrep
 fi
-GREP_OPTIONS="--binary-files=without-match"
-if [ `uname` != 'Darwin' ]
-then
-    GREP_OPTIONS="--directories=recurse $GREP_OPTIONS"
-fi
-GREP_OPTIONS="--exclude=\*.tmp $GREP_OPTIONS"
-if grep --help 2>&1 | grep -q -- --exclude-dir; then
-    GREP_OPTIONS="--exclude-dir=.svn --exclude-dir=.git --exclude-dir=.deps --exclude-dir=.libs $GREP_OPTIONS"
-fi
-
-if grep --help 2>&1 | grep -q -- --color; then
-    GREP_OPTIONS="--color=auto $GREP_OPTIONS"
-fi
-export GREP_OPTIONS
 
 # =======================================================================
 # process
