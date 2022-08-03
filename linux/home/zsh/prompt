@@ -79,7 +79,7 @@ function git_status {
 GIT_PROMPT_COLOR_DIRTY="%{$fg[red]%}"
 GIT_PROMPT_COLOR_CLEAN="%{$fg[green]%}"
 function git_prompt_color {
-    if [[ -n $(git status -s --ignore-submodules=dirty 2> /dev/null) ]]; then
+    if [[ -n $(git status --short --ignore-submodules=dirty 2> /dev/null) ]]; then
       echo "${GIT_PROMPT_COLOR_DIRTY}"
     else
       echo "${GIT_PROMPT_COLOR_CLEAN}"
