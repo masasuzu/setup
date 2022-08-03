@@ -4,7 +4,6 @@ autoload -U colors; colors;
 
 BRACKET="[]"
 PAREN="()"
-PROMPT_SUFFIX="%#"
 
 # memo:
 # %n user
@@ -14,19 +13,15 @@ PROMPT_SUFFIX="%#"
 # %D YY-mm-dd
 
 function host_prompt () {
-    echo "%{$fg[magenta]%}$BRACKET[1]%n@%m$BRACKET[2]%{${reset_color}%}"
+    echo "%(?.%{$fg[green]%}.%{$fg[red]%})$BRACKET[1]%n@%m$BRACKET[2]%{${reset_color}%}"
 }
 
 function time_prompt () {
-    echo "%(?.%{$fg[green]%}.%{$fg[red]%})%*%{${reset_color}%}"
-}
-
-function end_prompt () {
-    echo "%{$fg[cyan]%}${PROMPT_SUFFIX}%{${reset_color}%} "
+    echo "%{$fg[cyan]%}%* %#%{${reset_color}%} "
 }
 
 function update_prompt () {
-    PROMPT="$( host_prompt ) $( time_prompt ) $( end_prompt )"
+    PROMPT="$( host_prompt ) $( time_prompt )"
     RPROMPT="$( git_prompt )$( current_path_prompt )"
 }
 
@@ -53,30 +48,30 @@ function git_status {
     GIT_INDEX=$(git status --porcelain 2> /dev/null)
     GIT_STATUS=''
     if $(echo "$GIT_INDEX" | grep '^?? ' &> /dev/null); then
-      GIT_STATUS="$GIT_PROMPT_UNTRACKED$GIT_STATUS"
+      GIT_STATUS+="$GIT_PROMPT_UNTRACKED"
     fi
     if $(echo "$GIT_INDEX" | grep '^A  ' &> /dev/null); then
-      GIT_STATUS="$GIT_PROMPT_ADDED$GIT_STATUS"
+      GIT_STATUS+="$GIT_PROMPT_ADDED"
     elif $(echo "$GIT_INDEX" | grep '^M  ' &> /dev/null); then
-      GIT_STATUS="$GIT_PROMPT_ADDED$GIT_STATUS"
+      GIT_STATUS+="$GIT_PROMPT_ADDED"
     fi
     if $(echo "$GIT_INDEX" | grep '^ M ' &> /dev/null); then
-      GIT_STATUS="$GIT_PROMPT_MODIFIED$GIT_STATUS"
+      GIT_STATUS+="$GIT_PROMPT_MODIFIED"
     elif $(echo "$GIT_INDEX" | grep '^AM ' &> /dev/null); then
-      GIT_STATUS="$GIT_PROMPT_MODIFIED$GIT_STATUS"
+      GIT_STATUS+="$GIT_PROMPT_MODIFIED"
     elif $(echo "$GIT_INDEX" | grep '^ T ' &> /dev/null); then
-      GIT_STATUS="$GIT_PROMPT_MODIFIED$GIT_STATUS"
+      GIT_STATUS+="$GIT_PROMPT_MODIFIED"
     fi
     if $(echo "$GIT_INDEX" | grep '^R  ' &> /dev/null); then
-      GIT_STATUS="$GIT_PROMPT_RENAMED$GIT_STATUS"
+      GIT_STATUS+="$GIT_PROMPT_RENAMED"
     fi
     if $(echo "$GIT_INDEX" | grep '^ D ' &> /dev/null); then
-      GIT_STATUS="$GIT_PROMPT_DELETED$GIT_STATUS"
+      GIT_STATUS+="$GIT_PROMPT_DELETED"
     elif $(echo "$GIT_INDEX" | grep '^AD ' &> /dev/null); then
-      GIT_STATUS="$GIT_PROMPT_DELETED$GIT_STATUS"
+      GIT_STATUS+="$GIT_PROMPT_DELETED"
     fi
     if $(echo "$GIT_INDEX" | grep '^UU ' &> /dev/null); then
-      GIT_STATUS="$GIT_PROMPT_UNMERGED$GIT_STATUS"
+      GIT_STATUS+="$GIT_PROMPT_UNMERGED"
     fi
     echo "%{$fg[yellow]%}${GIT_STATUS}%{${reset_color}%}"
 }
