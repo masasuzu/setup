@@ -1,48 +1,32 @@
 # vim:ft=zsh:
 
-PROMPT_PAREN="()"
-PROMPT_SUFFIX2="\>"
-
-if [[ -n "$LOGIN_SHELL" ]]; then
-    PROMPT_PAREN="[]"
-fi
-
-
 autoload -U colors; colors;
 
+BRACKET="[]"
+PAREN="()"
+PROMPT_SUFFIX="%#"
 
-function domain_prompt () {
-    if [ ${LOGIN_SHELL} ]; then
-        DOMAIN_DOLOR="yellow"
-    else
-        DOMAIN_DOLOR="red"
-    fi
+# memo:
+# %n user
+# %m host
+# %~ current directory
+# %* HH:MM:SS
+# %D YY-mm-dd
 
-    echo "%{$fg_bold[$DOMAIN_DOLOR]%}${DOMAIN}%{${reset_color}%}"
-}
 function host_prompt () {
-    echo "%{$fg[cyan]%}%n@%m%#%{${reset_color}%} "
+    echo "%{$fg[magenta]%}$BRACKET[1]%n@%m$BRACKET[2]%{${reset_color}%}"
 }
 
-function domain_prompt2 () {
-    echo "%{$fg[yellow]%}${DOMAIN}%{${reset_color}%}"
-}
-function host_prompt2 () {
-    echo "%{$fg[magenta]%}%n@%m%${PROMPT_SUFFIX2}%{${reset_color}%} "
+function time_prompt () {
+    echo "%(?.%{$fg[green]%}.%{$fg[red]%})%*%{${reset_color}%}"
 }
 
-function hms() {
-    echo $(date +'%H:%M:%S')
-}
-
-function last_command_status () {
-    echo "%(?.%{$fg[green]%}$( hms )%{${reset_color}%}.%{$fg[red]%}$( hms )%{${reset_color}%})"
+function end_prompt () {
+    echo "%{$fg[cyan]%}${PROMPT_SUFFIX}%{${reset_color}%} "
 }
 
 function update_prompt () {
-    PROMPT="$(  domain_prompt  ) $( last_command_status ) $( host_prompt  )"
-    PROMPT2="$( domain_prompt2 ) $( last_command_status ) $( host_prompt2 )"
-
+    PROMPT="$( host_prompt ) $( time_prompt ) $( end_prompt )"
     RPROMPT="$( git_prompt )$( current_path_prompt )"
 }
 
@@ -107,24 +91,8 @@ function git_prompt_color {
     fi
 }
 
-if [[ -n "$WINDOW" ]]; then
-    function preexec() {
-        update_prompt
-        local cmd=${1[(wr)^(*=*|sudo|vim|vi|lv|ssh|-*)]}
-        echo -ne "\ek$cmd\e\\"
-    }
+autoload -Uz add-zsh-hook
+# プロンプト表示直前にプロンプト内容を書き換える
+add-zsh-hook precmd update_prompt
+add-zsh-hook preexec update_prompt
 
-    function precmd() {
-        update_prompt
-        local cwd=`print -nP %~`
-        echo -n "\ek$cwd:t/\e\\"
-    }
-else
-    function preexec() {
-        update_prompt
-    }
-
-    function precmd() {
-        update_prompt
-    }
-fi
