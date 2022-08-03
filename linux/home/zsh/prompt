@@ -47,30 +47,30 @@ function git_prompt {
 function git_status {
     GIT_INDEX=$(git status --porcelain 2> /dev/null)
     GIT_STATUS=''
-    if $(echo "$GIT_INDEX" | grep '^?? ' &> /dev/null); then
+    if $(echo "$GIT_INDEX" | grep --silent '^?? '); then
       GIT_STATUS+="$GIT_PROMPT_UNTRACKED"
     fi
-    if $(echo "$GIT_INDEX" | grep '^A  ' &> /dev/null); then
+    if $(echo "$GIT_INDEX" | grep --silent '^A  '); then
       GIT_STATUS+="$GIT_PROMPT_ADDED"
-    elif $(echo "$GIT_INDEX" | grep '^M  ' &> /dev/null); then
+    elif $(echo "$GIT_INDEX" | grep --silent '^M  '); then
       GIT_STATUS+="$GIT_PROMPT_ADDED"
     fi
-    if $(echo "$GIT_INDEX" | grep '^ M ' &> /dev/null); then
+    if $(echo "$GIT_INDEX" | grep --silent '^ M '); then
       GIT_STATUS+="$GIT_PROMPT_MODIFIED"
-    elif $(echo "$GIT_INDEX" | grep '^AM ' &> /dev/null); then
+    elif $(echo "$GIT_INDEX" | grep --silent '^AM '); then
       GIT_STATUS+="$GIT_PROMPT_MODIFIED"
-    elif $(echo "$GIT_INDEX" | grep '^ T ' &> /dev/null); then
+    elif $(echo "$GIT_INDEX" | grep --silent '^ T '); then
       GIT_STATUS+="$GIT_PROMPT_MODIFIED"
     fi
-    if $(echo "$GIT_INDEX" | grep '^R  ' &> /dev/null); then
+    if $(echo "$GIT_INDEX" | grep --silent '^R  '); then
       GIT_STATUS+="$GIT_PROMPT_RENAMED"
     fi
-    if $(echo "$GIT_INDEX" | grep '^ D ' &> /dev/null); then
+    if $(echo "$GIT_INDEX" | grep --silent '^ D '); then
       GIT_STATUS+="$GIT_PROMPT_DELETED"
-    elif $(echo "$GIT_INDEX" | grep '^AD ' &> /dev/null); then
+    elif $(echo "$GIT_INDEX" | grep --silent '^AD '); then
       GIT_STATUS+="$GIT_PROMPT_DELETED"
     fi
-    if $(echo "$GIT_INDEX" | grep '^UU ' &> /dev/null); then
+    if $(echo "$GIT_INDEX" | grep --silent '^UU '); then
       GIT_STATUS+="$GIT_PROMPT_UNMERGED"
     fi
     echo "%{$fg[yellow]%}${GIT_STATUS}%{${reset_color}%}"
