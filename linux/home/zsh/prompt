@@ -20,15 +20,15 @@ PAREN="()"
 # %* HH:MM:SS
 # %D YY-mm-dd
 
-function host_prompt () {
+function host_prompt {
     echo "%(?.%{$fg[green]%}.%{$fg[red]%})$BRACKET[1]%n@%m$BRACKET[2]%{${reset_color}%}"
 }
 
-function time_prompt () {
+function time_prompt {
     echo "%{$fg[cyan]%}%* %#%{${reset_color}%} "
 }
 
-function update_prompt () {
+function update_prompt {
     PROMPT="$( host_prompt ) $( time_prompt )"
     RPROMPT="$( git_prompt )$( current_aws_prompt )$( current_path_prompt )"
 }
@@ -95,5 +95,5 @@ function git_status {
 autoload -Uz add-zsh-hook
 # プロンプト表示直前にプロンプト内容を書き換える
 add-zsh-hook precmd update_prompt
-add-zsh-hook preexec update_prompt
+#add-zsh-hook preexec update_prompt
 
