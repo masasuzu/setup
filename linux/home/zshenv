@@ -10,15 +10,6 @@ then
     eval `dircolors $HOME/etc/dircolors`
 fi
 
-# インタラクティブシェルで起動するとzprofileを読まないので
-if [ ! ${LOGIN_SHELL:-} ]; then
-    if [ ${DOMAIN} ]; then
-        DOMAIN="${DOMAIN}(i)"
-    else
-        DOMAIN="[ LOCAL ](i)"
-    fi
-
-fi
 
 # シェルスクリプトを実行するときいろいろ困るので
 source "${HOME}/.zsh/devenv"

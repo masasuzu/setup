@@ -13,7 +13,6 @@ env:
 	ln -fs  `pwd`/home/zsh/prompt       ${HOME}/.zsh/prompt
 	ln -fs  `pwd`/home/zsh/functions    ${HOME}/.zsh/functions
 	ln -fs  `pwd`/home/zsh/alias        ${HOME}/.zsh/alias
-	ln -fs  `pwd`/home/zsh/devprofile   ${HOME}/.zsh/devprofile
 	ln -fs  `pwd`/home/zsh/devenv       ${HOME}/.zsh/devenv
 	ln -fs  `pwd`/home/zprofile         ${HOME}/.zprofile
 	ln -fs  `pwd`/home/tscreenrc        ${HOME}/.tscreenrc
