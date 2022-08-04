@@ -1,4 +1,12 @@
 # vim:ft=zsh:
+# =======================================================================
+# prompt
+# -----------------------------------------------------------------------
+
+setopt prompt_subst
+setopt prompt_cr
+setopt transient_rprompt
+setopt prompt_percent
 
 autoload -U colors; colors;
 
@@ -33,63 +41,56 @@ function current_path_prompt {
     echo "%{$fg[cyan]%}$PAREN[1]%~$PAREN[2]%{${reset_color}%}"
 }
 
-GIT_PROMPT_ADDED="(added)"
-GIT_PROMPT_MODIFIED="(modified)"
-GIT_PROMPT_DELETED="(deleted)"
-GIT_PROMPT_RENAMED="(renamed)"
-GIT_PROMPT_UNMERGED="(unmerged)"
-GIT_PROMPT_UNTRACKED="(untracked)"
 
 function git_prompt {
-    GIT_CURRENT_BRANCH=$( git branch &> /dev/null | grep '^\*' | cut -b 3- )
-    if [ ${GIT_CURRENT_BRANCH} ]
+    git_current_branch=$( git branch &> /dev/null | grep '^\*' | cut -b 3- )
+    if [ ${git_current_branch} ]
     then
-        GIT_BRANCH="$( git_prompt_color )$PROMPT_PAREN[1]branch:${GIT_CURRENT_BRANCH}$PROMPT_PAREN[2]%{${reset_color}%}"
+        GIT_BRANCH="$( git_prompt_color )$PROMPT_PAREN[1]branch:${git_current_branch}$PROMPT_PAREN[2]%{${reset_color}%}"
         echo "${GIT_BRANCH}$( git_status )"
     fi
 }
 
-function git_status {
-    GIT_INDEX=$(git status --porcelain 2> /dev/null)
-    GIT_STATUS=''
-    if $(echo "$GIT_INDEX" | grep --silent '^?? '); then
-      GIT_STATUS+="$GIT_PROMPT_UNTRACKED"
-    fi
-    if $(echo "$GIT_INDEX" | grep --silent '^A  '); then
-      GIT_STATUS+="$GIT_PROMPT_ADDED"
-    elif $(echo "$GIT_INDEX" | grep --silent '^M  '); then
-      GIT_STATUS+="$GIT_PROMPT_ADDED"
-    fi
-    if $(echo "$GIT_INDEX" | grep --silent '^ M '); then
-      GIT_STATUS+="$GIT_PROMPT_MODIFIED"
-    elif $(echo "$GIT_INDEX" | grep --silent '^AM '); then
-      GIT_STATUS+="$GIT_PROMPT_MODIFIED"
-    elif $(echo "$GIT_INDEX" | grep --silent '^ T '); then
-      GIT_STATUS+="$GIT_PROMPT_MODIFIED"
-    fi
-    if $(echo "$GIT_INDEX" | grep --silent '^R  '); then
-      GIT_STATUS+="$GIT_PROMPT_RENAMED"
-    fi
-    if $(echo "$GIT_INDEX" | grep --silent '^ D '); then
-      GIT_STATUS+="$GIT_PROMPT_DELETED"
-    elif $(echo "$GIT_INDEX" | grep --silent '^AD '); then
-      GIT_STATUS+="$GIT_PROMPT_DELETED"
-    fi
-    if $(echo "$GIT_INDEX" | grep --silent '^UU '); then
-      GIT_STATUS+="$GIT_PROMPT_UNMERGED"
-    fi
-    echo "%{$fg[yellow]%}${GIT_STATUS}%{${reset_color}%}"
-}
-
-GIT_PROMPT_COLOR_DIRTY="%{$fg[red]%}"
-GIT_PROMPT_COLOR_CLEAN="%{$fg[green]%}"
 function git_prompt_color {
     if [[ -n $(git status --short --ignore-submodules=dirty 2> /dev/null) ]]; then
-      echo "${GIT_PROMPT_COLOR_DIRTY}"
+      echo "%{$fg[red]%}"
     else
-      echo "${GIT_PROMPT_COLOR_CLEAN}"
+      echo "%{$fg[green]%}"
     fi
 }
+
+function git_status {
+    git_index=$(git status --porcelain 2> /dev/null)
+    git_status=''
+    if $(echo "${git_index}" | grep --silent '^?? '); then
+      git_status+="(untracked)"
+    fi
+    if $(echo "${git_index}" | grep --silent '^A  '); then
+      git_status+="(added)"
+    elif $(echo "${git_index}" | grep --silent '^M  '); then
+      git_status+="(added)"
+    fi
+    if $(echo "${git_index}" | grep --silent '^ M '); then
+      git_status+="(modified)"
+    elif $(echo "${git_index}" | grep --silent '^AM '); then
+      git_status+="(modified)"
+    elif $(echo "${git_index}" | grep --silent '^ T '); then
+      git_status+="(modified)"
+    fi
+    if $(echo "${git_index}" | grep --silent '^R  '); then
+      git_status+="(renamed)"
+    fi
+    if $(echo "${git_index}" | grep --silent '^ D '); then
+      git_status+="(deleted)"
+    elif $(echo "${git_index}" | grep --silent '^AD '); then
+      git_status+="(deleted)"
+    fi
+    if $(echo "${git_index}" | grep --silent '^UU '); then
+      git_status+="(unmerged)"
+    fi
+    echo "%{$fg[yellow]%}${git_status}%{${reset_color}%}"
+}
+
 
 autoload -Uz add-zsh-hook
 # プロンプト表示直前にプロンプト内容を書き換える
