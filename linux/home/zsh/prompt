@@ -22,7 +22,15 @@ function time_prompt () {
 
 function update_prompt () {
     PROMPT="$( host_prompt ) $( time_prompt )"
-    RPROMPT="$( git_prompt )$( current_path_prompt )"
+    RPROMPT="$( current_aws_prompt )$( git_prompt )$( current_path_prompt )"
+}
+
+function current_aws_prompt {
+    echo "%{$fg[cyan]%}$PAREN[1]${AWS_PROFILE:--}$PAREN[2]%{${reset_color}%}"
+}
+
+function current_path_prompt {
+    echo "%{$fg[cyan]%}$PAREN[1]%~$PAREN[2]%{${reset_color}%}"
 }
 
 GIT_PROMPT_ADDED="(added)"
@@ -32,9 +40,6 @@ GIT_PROMPT_RENAMED="(renamed)"
 GIT_PROMPT_UNMERGED="(unmerged)"
 GIT_PROMPT_UNTRACKED="(untracked)"
 
-function current_path_prompt {
-    echo "%{$fg[cyan]%}$PROMPT_PAREN[1]%~$PROMPT_PAREN[2]%{${reset_color}%}"
-}
 function git_prompt {
     GIT_CURRENT_BRANCH=$( git branch &> /dev/null | grep '^\*' | cut -b 3- )
     if [ ${GIT_CURRENT_BRANCH} ]
