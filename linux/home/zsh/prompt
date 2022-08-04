@@ -30,7 +30,7 @@ function time_prompt () {
 
 function update_prompt () {
     PROMPT="$( host_prompt ) $( time_prompt )"
-    RPROMPT="$( current_aws_prompt )$( git_prompt )$( current_path_prompt )"
+    RPROMPT="$( git_prompt )$( current_aws_prompt )$( current_path_prompt )"
 }
 
 function current_aws_prompt {
